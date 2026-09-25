@@ -107,7 +107,7 @@
       transform: scale(1.05);
     }
 
-    /* Sky Canvas */
+    /* Canvas Bầu Trời */
     #skyCanvas {
       position: fixed;
       top: 0;
@@ -118,7 +118,7 @@
       pointer-events: auto;
     }
 
-    /* Music Widget */
+    /* Widget Nhạc Vinyl */
     .music-widget {
       position: fixed;
       top: 15px;
@@ -170,7 +170,7 @@
       color: #94a3b8;
     }
 
-    /* Container Chính */
+    /* Container chính */
     .app-container {
       position: relative;
       z-index: 10;
@@ -208,7 +208,7 @@
       font-weight: 700;
     }
 
-    /* Layout Grid 3 Cột Như Cũ */
+    /* Layout 3 Cột Ngang Cân Đối */
     .top-cards-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -252,7 +252,7 @@
       line-height: 1.4;
     }
 
-    /* Grid Nút Đèn Lồng 6 Bạn */
+    /* Grid Thành Viên F6 */
     .f6-members-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -342,35 +342,70 @@
       color: #fff;
     }
 
+    textarea.form-control {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    /* KHUNG XEM TRƯỚC THIỆP SANG TRỌNG */
     .card-preview-box {
-      background: linear-gradient(135deg, #2a0404 0%, #0d001a 100%);
-      border: 1.5px solid var(--gold);
-      border-radius: 14px;
-      padding: 15px 12px;
+      background: linear-gradient(135deg, #2c0505 0%, #120224 100%);
+      border: 2px solid var(--gold);
+      border-radius: 16px;
+      padding: 20px 15px;
       text-align: center;
       margin-top: 12px;
+      box-shadow: 0 0 20px rgba(255, 200, 55, 0.25);
+      position: relative;
     }
 
     .card-preview-title {
       font-family: 'Dancing Script', cursive;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       color: var(--gold);
-      margin-bottom: 6px;
+      margin-bottom: 8px;
+      text-shadow: 0 0 8px rgba(255,200,55,0.5);
+    }
+
+    .card-preview-avatar {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 10px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      overflow: hidden;
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 12px rgba(255, 200, 55, 0.4);
+    }
+
+    .card-preview-avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-preview-avatar-emoji {
+      font-size: 2rem;
+    }
+
+    .card-preview-to {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+      font-weight: 800;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
     }
 
     .card-preview-text {
-      font-size: 0.82rem;
-      line-height: 1.5;
-      color: #f1f5f9;
-      margin-bottom: 8px;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: #f8fafc;
       font-style: italic;
-    }
-
-    .card-preview-sender {
-      font-size: 0.78rem;
-      color: var(--gold-dark);
-      font-weight: bold;
-      text-align: right;
+      padding: 0 5px;
     }
 
     .btn-action {
@@ -392,66 +427,111 @@
       background: linear-gradient(135deg, #ff4d4d, #cc0000);
     }
 
-    /* Hũ Quẻ */
-    .fortune-box {
+    /* GIEO QUẺ TRUNG THU TRUYỀN THỐNG (ỐNG XĂM TRE) */
+    .fortune-section {
       text-align: center;
-      padding: 20px 0;
-    }
-
-    .fortune-pot {
-      font-size: 3.5rem;
-      cursor: pointer;
-      display: inline-block;
-      animation: pulse 2s infinite;
-      transition: transform 0.2s;
-    }
-
-    .fortune-pot:hover {
-      transform: scale(1.1);
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.08); }
-    }
-
-    .fortune-result {
-      background: rgba(255, 200, 55, 0.1);
-      border: 1px dashed var(--gold);
-      border-radius: 10px;
-      padding: 12px;
-      margin-top: 15px;
-      font-size: 0.85rem;
-      color: var(--gold);
-      line-height: 1.5;
-      display: none;
-    }
-
-    /* Thẻ Hứng Bánh Ở Dưới */
-    .bottom-game-card {
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    #gameCanvas {
-      width: 100%;
-      height: 200px;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(255, 200, 55, 0.3);
-      border-radius: 12px;
-      margin-top: 8px;
-      touch-action: none;
-    }
-
-    .game-stats {
       display: flex;
-      justify-content: space-between;
-      font-size: 0.82rem;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 0;
+    }
+
+    .bamboo-tube-container {
+      position: relative;
+      width: 90px;
+      height: 110px;
+      margin: 10px auto 15px;
+      cursor: pointer;
+    }
+
+    .bamboo-tube {
+      width: 70px;
+      height: 95px;
+      background: linear-gradient(135deg, #8b5a2b 0%, #4a2e12 100%);
+      border: 2px solid var(--gold);
+      border-radius: 12px 12px 25px 25px;
+      margin: 0 auto;
+      position: relative;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6), inset 0 0 10px rgba(255,200,55,0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.1s;
+    }
+
+    .bamboo-tube::before {
+      content: "🥮 QUẺ 🥮";
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 3px 6px;
+      border-radius: 6px;
+      background: rgba(0,0,0,0.4);
+    }
+
+    .bamboo-sticks {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 4px;
+      pointer-events: none;
+    }
+
+    .stick {
+      width: 6px;
+      height: 35px;
+      background: linear-gradient(to bottom, #ffe066, #b38600);
+      border-radius: 3px;
+      border: 1px solid #ffdf00;
+      box-shadow: 0 0 5px rgba(255,223,0,0.5);
+    }
+
+    .stick:nth-child(2) { height: 42px; transform: rotate(-8deg); }
+    .stick:nth-child(3) { height: 38px; transform: rotate(6deg); }
+
+    .bamboo-tube-container.shaking .bamboo-tube {
+      animation: shakeTube 0.5s ease-in-out infinite;
+    }
+
+    @keyframes shakeTube {
+      0% { transform: rotate(0deg) translateY(0); }
+      25% { transform: rotate(-12deg) translateY(-5px); }
+      50% { transform: rotate(12deg) translateY(3px); }
+      75% { transform: rotate(-8deg) translateY(-3px); }
+      100% { transform: rotate(0deg) translateY(0); }
+    }
+
+    .drawn-stick-card {
+      background: linear-gradient(135deg, #2a0b1a 0%, #0c0414 100%);
+      border: 1.5px solid var(--gold);
+      border-radius: 14px;
+      padding: 15px;
+      margin-top: 12px;
+      width: 100%;
+      box-shadow: 0 0 15px rgba(255, 200, 55, 0.3);
+      display: none;
+      animation: popIn 0.4s ease;
+    }
+
+    .stick-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
       color: var(--gold);
       font-weight: bold;
+      margin-bottom: 6px;
     }
 
-    /* Modal Lời Chúc Chuẩn Hình */
+    .stick-desc {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #f8fafc;
+      font-style: italic;
+    }
+
+    /* Pop-up Modal */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -480,7 +560,7 @@
       border: 1.5px solid var(--gold);
       border-radius: 24px;
       padding: 30px 20px 20px;
-      max-width: 400px;
+      max-width: 420px;
       width: 100%;
       text-align: center;
       box-shadow: 0 0 30px rgba(255, 200, 55, 0.3);
@@ -542,7 +622,7 @@
       font-size: 1.8rem;
       color: var(--gold);
       font-style: italic;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       text-shadow: var(--text-glow);
     }
 
@@ -550,7 +630,7 @@
       width: 50px;
       height: 2px;
       background: var(--gold);
-      margin: 0 auto 15px;
+      margin: 0 auto 12px;
       border-radius: 2px;
       box-shadow: var(--text-glow);
     }
@@ -613,6 +693,11 @@
       transform: translateX(-50%) translateY(0);
     }
 
+    @keyframes popIn {
+      0% { transform: scale(0.85); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
     @media (max-width: 850px) {
       .top-cards-grid {
         grid-template-columns: 1fr;
@@ -660,7 +745,7 @@
       <p class="sub-title">TRUNG THU VUI VẺ • GẮN KẾT YÊU THƯƠNG</p>
     </header>
 
-    <!-- Hàng 3 Cột Ngang Như Cũ -->
+    <!-- Hàng 3 Cột Ngang Cân Đối -->
     <div class="top-cards-grid">
 
       <!-- Cột 1: Đèn Lồng F6 -->
@@ -679,8 +764,9 @@
           <span class="panel-icon">💌</span>
           <h2 class="panel-title">Tạo Thiệp Trung Thu</h2>
         </div>
+        
         <div class="form-group">
-          <label>Gửi đến bạn:</label>
+          <label>Người nhận thiệp:</label>
           <select class="form-control" id="cardReceiverSelect">
             <option value="Cả Nhóm F6 Super Stars">Cả Nhóm F6 Super Stars</option>
             <option value="Thanh Tâm">Thanh Tâm</option>
@@ -691,56 +777,68 @@
             <option value="Lê Doãn Thái">Lê Doãn Thái</option>
           </select>
         </div>
+
         <div class="form-group">
-          <label>Mẫu lời chúc:</label>
+          <label>Mẫu lời chúc có sẵn:</label>
           <select class="form-control" id="cardWishPreset">
             <option value="Chúc nhóm F6 Trung Thu ngập tràn tiếng cười, điểm cao chót vót, ăn bánh trung thu không sợ béo!">Mẫu 1: Vui vẻ & Học tốt</option>
             <option value="Trung Thu này chúc bạn tôi sớm có người yêu, tiền vào như nước, đẹp trai đẹp gái nhất xóm!">Mẫu 2: Tài lộc & Tình duyên</option>
             <option value="Cảm ơn vì đã luôn là 1 phần tuyệt vời của F6. Mãi bên nhau bạn nhé!">Mẫu 3: Tình bạn bền chặt</option>
+            <option value="CUSTOM">-- Tự nhập lời chúc riêng --</option>
           </select>
         </div>
 
+        <div class="form-group" id="customWishGroup" style="display: none;">
+          <label>Nhập lời chúc của riêng bạn:</label>
+          <textarea class="form-control" id="customWishInput" placeholder="Viết lời chúc thân thương tại đây..."></textarea>
+        </div>
+
+        <!-- MẪU THIỆP SANG TRỌNG XUẤT PNG -->
         <div class="card-preview-box" id="cardExportTarget">
           <div class="card-preview-title">Happy Mid-Autumn</div>
+          
+          <div class="card-preview-avatar" id="cardPreviewAvatarBox">
+            <!-- JS chèn avatar người nhận -->
+          </div>
+
+          <div class="card-preview-to" id="cardReceiverDisplay">Gửi Cả Nhóm F6 Super Stars</div>
           <div class="card-preview-text" id="cardTextDisplay">"Chúc nhóm F6 Trung Thu ngập tràn tiếng cười..."</div>
-          <div class="card-preview-sender" id="cardReceiverDisplay">To: Cả Nhóm F6</div>
         </div>
 
         <button class="btn-action" id="btnDownloadCard">📸 Tải Thiệp Về Máy (PNG)</button>
       </div>
 
-      <!-- Cột 3: Hũ Quẻ -->
+      <!-- Cột 3: Gieo Quẻ Trung Thu (Ống Xăm Tre) -->
       <div class="card-panel interactive-element">
         <div class="panel-header">
-          <span class="panel-icon">🏺</span>
-          <h2 class="panel-title">Hũ Quẻ Trung Thu</h2>
+          <span class="panel-icon">🎋</span>
+          <h2 class="panel-title">Gieo Quẻ Trung Thu</h2>
         </div>
-        <div class="fortune-box">
-          <div class="fortune-pot" id="fortunePotBtn">🏺</div>
-          <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 8px;">Chạm vào hũ để bốc quẻ Trung Thu F6!</p>
-          <div class="fortune-result" id="fortuneResultText"></div>
+        <div class="fortune-section">
+          <div class="bamboo-tube-container" id="bambooTubeBtn">
+            <div class="bamboo-sticks">
+              <div class="stick"></div>
+              <div class="stick"></div>
+              <div class="stick"></div>
+            </div>
+            <div class="bamboo-tube"></div>
+          </div>
+          <p class="panel-desc">Chạm vào ống xăm để xóc quẻ Trung Thu F6!</p>
+          
+          <button class="btn-action" id="btnShakeFortune" style="margin-top: 5px;">🎋 Xóc Quẻ Đêm Rằm</button>
+
+          <div class="drawn-stick-card" id="drawnStickResult">
+            <div class="stick-title" id="stickTitleText">Quẻ Thượng Thượng</div>
+            <div class="stick-desc" id="stickDescText">Đang rút thẻ quẻ...</div>
+          </div>
         </div>
       </div>
 
-    </div>
-
-    <!-- Hàng Dưới: Hứng Bánh -->
-    <div class="card-panel bottom-game-card interactive-element">
-      <div class="panel-header">
-        <span class="panel-icon">🥮</span>
-        <h2 class="panel-title">Hứng Bánh Đêm Rằm</h2>
-      </div>
-      <div class="game-stats">
-        <span>Điểm: <strong id="gameScore" style="color: var(--gold);">0</strong></span>
-        <span>Mạng: <span id="gameLives">❤️❤️❤️</span></span>
-      </div>
-      <canvas id="gameCanvas"></canvas>
-      <button class="btn-action" id="btnStartGame">🎮 Chơi Ngay / Bắt Đầu Lại</button>
     </div>
 
   </div>
 
-  <!-- Pop-up Modal Chuẩn Ảnh -->
+  <!-- Pop-up Modal Lời Chúc Thành Viên -->
   <div class="modal-overlay" id="wishModal">
     <div class="modal-card">
       <div class="btn-modal-close" id="btnCloseModal">✕</div>
@@ -760,21 +858,58 @@
   <div class="toast-msg" id="toastMsg">Đã sao chép lời chúc!</div>
 
   <script>
+    /* DỮ LIỆU THÀNH VIÊN F6 - LỜI CHÚC DÀI & Ý NGHĨA */
     const f6Members = [
-      { id: "thanhtam", name: "Thanh Tâm", avatar: "thanhtam.jpg", emoji: "👧🏻", wish: "Chúc Thanh Tâm Trung Thu xinh đẹp lộng lẫy, học giỏi gánh team F6 và luôn rạng rỡ như ánh trăng rằm!" },
-      { id: "quynhnhu", name: "Quỳnh Như", avatar: "quynhnhu.jpg", emoji: "👩🏻", wish: "Chúc Quỳnh Như luôn tươi tắn rạng rỡ như Hằng Nga, tràn ngập năng lượng tích cực, thi cử mượt mà điểm cao chót vót!" },
-      { id: "quanghieu", name: "Quang Hiếu", avatar: null, emoji: "👦🏻", wish: "Chúc Quang Hiếu Trung Thu đẹp trai vô cực, thi cử luôn đạt max điểm và sớm tìm được gấu đi phá cỗ nhé!" },
-      { id: "huyvu", name: "Huy Vũ", avatar: null, emoji: "🧑🏻", wish: "Chúc Huy Vũ luôn phong độ, game nào cũng gánh team và Trung Thu này ăn bánh nướng bánh dẻo thoải mái không lo béo!" },
-      { id: "quynhnga", name: "Quỳnh Nga", avatar: null, emoji: "👩🏼", wish: "Chúc Quỳnh Nga Trung Thu đáng yêu, dịu dàng, nhiều quà và luôn là mảnh ghép ấm áp tuyệt vời của gia đình F6!" },
-      { id: "doanthai", name: "Lê Doãn Thái", avatar: "doanthai.jpg", emoji: "🧑🏻‍💻", wish: "Chúc Lê Doãn Thái code mượt không bug, làm web siêu ngầu cho F6 và đón mùa Trung Thu thật hạnh phúc trọn vẹn!" }
+      {
+        id: "thanhtam",
+        name: "Thanh Tâm",
+        avatar: "thanhtam.jpg",
+        emoji: "👧🏻",
+        wish: "Chúc Thanh Tâm một mùa Trung Thu thật ấm áp, xinh đẹp rạng rỡ như ánh trăng rằm tháng Tám. Mong rằng bước sang tuổi mới, Tâm luôn giữ vững nụ cười hồn nhiên, thi cử đạt kết quả tuyệt vời và luôn là mảnh ghép dịu dàng, đáng yêu không thể thiếu của gia đình F6!"
+      },
+      {
+        id: "quynhnhu",
+        name: "Quỳnh Như",
+        avatar: "quynhnhu.jpg",
+        emoji: "👩🏻",
+        wish: "Chúc Quỳnh Như một mùa Trăng rằm tràn ngập niềm vui và năng lượng tích cực! Mong Như luôn rực rỡ như Hằng Nga, mọi ước mơ đều trở thành hiện thực, thi cử thuận lợi mượt mà điểm cao chót vót và mãi giữ trọn tình bạn gắn kết, ngọt ngào cùng F6 nhé!"
+      },
+      {
+        id: "quanghieu",
+        name: "Quang Hiếu",
+        avatar: null,
+        emoji: "👦🏻",
+        wish: "Chúc Quang Hiếu đón Tết Trung Thu tràn đầy niềm vui, phong độ vững vàng và gánh team mọi trận đấu! Mong rằng Hiếu luôn giữ được tinh thần nhiệt huyết, học tập đỉnh cao, sớm tìm được 'nửa kia' cùng đi phá cỗ và luôn là người bạn đáng tin cậy của nhóm F6!"
+      },
+      {
+        id: "huyvu",
+        name: "Huy Vũ",
+        avatar: null,
+        emoji: "👦🏻", // Sửa thành con trai
+        wish: "Chúc Huy Vũ một đêm Rằm Trung Thu thật rực rỡ và ý nghĩa! Dưới ánh trăng thu trong trẻo, chúc Vũ luôn giữ được chí lớn, bản lĩnh kiên cường, sức khỏe dào dạt, thi cử luôn đỗ đạt cao và cùng hội anh em F6 kiến tạo thêm thật nhiều kỷ niệm đẹp không bao giờ quên!"
+      },
+      {
+        id: "quynhnga",
+        name: "Quỳnh Nga",
+        avatar: null,
+        emoji: "👩🏼",
+        wish: "Chúc Quỳnh Nga một mùa Trung Thu ngập tràn bánh ngọt, quà thơm và những nụ cười hạnh phúc! Mong Nga luôn giữ được sự đáng yêu, bình an trong tâm hồn, thi đâu trúng đó và mãi là ngọn lửa ấm áp thắp sáng không khí của gia đình F6 chúng mình!"
+      },
+      {
+        id: "doanthai",
+        name: "Lê Doãn Thái",
+        avatar: "doanthai.jpg",
+        emoji: "🧑🏻‍💻",
+        wish: "Chúc Lê Doãn Thái đón một đêm Rằm Trung Thu thật ngầu, code chạy mượt mà không bao giờ gặp bug! Cảm ơn Thái vì đã luôn tâm huyết xây dựng những kỷ niệm tuyệt vời cho F6. Chúc Thái sức khỏe, học tập xuất sắc và tương lai luôn tỏa sáng như vầng trăng rằm!"
+      }
     ];
 
     const fortunesList = [
-      "Quẻ Thượng Thượng: Trung Thu này nhóm F6 ăn bánh không béo, thi cử toàn 10, may mắn ngập tràn!",
-      "Quẻ Cát: Tình bạn F6 ngày càng bền chặt. Sắp tới sẽ có một chuyến đi chơi siêu vui!",
-      "Quẻ Đại Cát: Tiền vào như nước sông Hồng, tiền ra nhỏ giọt như cà phê phin. Sắm đồ thoải mái!",
-      "Quẻ Tình Duyên: Ai đang F.A trong F6 sắp sửa bị dính bùa yêu, Trung Thu sang năm có đôi có cặp!",
-      "Quẻ Học Hành: Thi đâu trúng đó, làm gì cũng suôn sẻ, gánh team cực ngầu!"
+      { title: "Quẻ Số 01 - Thượng Thượng Cát", desc: "Trung Thu này nhóm F6 ăn bánh không béo, thi cử toàn 10, vận may ngập tràn từ nhà ra ngõ!" },
+      { title: "Quẻ Số 02 - Tình Duyên Cát Phục", desc: "Ai đang F.A trong F6 sắp sửa bị dính bùa yêu, Trung Thu sang năm đi chơi có đôi có cặp siêu ngọt ngào!" },
+      { title: "Quẻ Số 03 - Tài Lộc Đại Phát", desc: "Tiền vào như nước sông Hồng, tiền ra nhỏ giọt như cà phê phin. Sắm đồ chơi Trung Thu thả ga!" },
+      { title: "Quẻ Số 04 - Trí Tuệ Hanh Thông", desc: "Học đâu hiểu đó, thi cử điểm max gánh team cực ngầu. Mọi dự định năm nay đều thành công rực rỡ!" },
+      { title: "Quẻ Số 05 - Bền Chặt Trường Cửu", desc: "Tình bạn nhóm F6 bền vững như thái sơn, mãi gắn kết yêu thương và có thêm nhiều chuyến đi chơi bùng nổ!" }
     ];
 
     /* Phát Nhạc */
@@ -1056,24 +1191,56 @@
       setTimeout(() => { toastMsg.classList.remove('show'); }, 2000);
     }
 
-    /* Tạo Thiệp */
+    /* BỘ TẠO THIỆP CẢI TIẾN: GỬI <TÊN NGƯỜI NHẬN> & XÓA FROM/TO */
     const cardReceiverSelect = document.getElementById('cardReceiverSelect');
     const cardWishPreset = document.getElementById('cardWishPreset');
+    const customWishGroup = document.getElementById('customWishGroup');
+    const customWishInput = document.getElementById('customWishInput');
     const cardTextDisplay = document.getElementById('cardTextDisplay');
     const cardReceiverDisplay = document.getElementById('cardReceiverDisplay');
+    const cardPreviewAvatarBox = document.getElementById('cardPreviewAvatarBox');
     const btnDownloadCard = document.getElementById('btnDownloadCard');
 
     function updateCardPreview() {
-      cardTextDisplay.innerText = `"${cardWishPreset.value}"`;
-      cardReceiverDisplay.innerText = `To: ${cardReceiverSelect.value}`;
+      const receiverName = cardReceiverSelect.value;
+      const targetMember = f6Members.find(m => m.name === receiverName);
+
+      // 1. Cập nhật Avatar người nhận trong thiệp
+      if (targetMember) {
+        if (targetMember.avatar) {
+          cardPreviewAvatarBox.innerHTML = `
+            <img src="${targetMember.avatar}" class="card-preview-avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <span class="card-preview-avatar-emoji" style="display:none;">${targetMember.emoji}</span>
+          `;
+        } else {
+          cardPreviewAvatarBox.innerHTML = `<span class="card-preview-avatar-emoji">${targetMember.emoji}</span>`;
+        }
+      } else {
+        // Cả nhóm F6
+        cardPreviewAvatarBox.innerHTML = `<span class="card-preview-avatar-emoji">🌕</span>`;
+      }
+
+      // 2. Cập nhật Dòng người nhận "Gửi <Tên>" (Xóa To / From)
+      cardReceiverDisplay.innerText = `Gửi ${receiverName}`;
+
+      // 3. Cập nhật Lời chúc
+      if (cardWishPreset.value === 'CUSTOM') {
+        customWishGroup.style.display = 'block';
+        cardTextDisplay.innerText = customWishInput.value.trim() ? `"${customWishInput.value}"` : '"Chúc bạn một mùa Trung Thu trọn vẹn niềm vui!"';
+      } else {
+        customWishGroup.style.display = 'none';
+        cardTextDisplay.innerText = `"${cardWishPreset.value}"`;
+      }
     }
 
     cardReceiverSelect.addEventListener('change', updateCardPreview);
     cardWishPreset.addEventListener('change', updateCardPreview);
+    customWishInput.addEventListener('input', updateCardPreview);
+    updateCardPreview();
 
     btnDownloadCard.addEventListener('click', () => {
       const target = document.getElementById('cardExportTarget');
-      html2canvas(target, { backgroundColor: '#1a0b2e', scale: 2 }).then(canvas => {
+      html2canvas(target, { backgroundColor: '#120224', scale: 2 }).then(canvas => {
         const link = document.createElement('a');
         link.download = `Thieptrungthu_F6_${cardReceiverSelect.value}.png`;
         link.href = canvas.toDataURL('image/png');
@@ -1081,101 +1248,28 @@
       });
     });
 
-    /* Hũ Quẻ */
-    const fortunePotBtn = document.getElementById('fortunePotBtn');
-    const fortuneResultText = document.getElementById('fortuneResultText');
+    /* GIEO QUẺ TRUNG THU - XÓC ỐNG XĂM TRE */
+    const bambooTubeBtn = document.getElementById('bambooTubeBtn');
+    const btnShakeFortune = document.getElementById('btnShakeFortune');
+    const drawnStickResult = document.getElementById('drawnStickResult');
+    const stickTitleText = document.getElementById('stickTitleText');
+    const stickDescText = document.getElementById('stickDescText');
 
-    fortunePotBtn.addEventListener('click', () => {
-      fortunePotBtn.style.animation = "shake 0.5s";
+    function shakeAndDrawFortune() {
+      bambooTubeBtn.classList.add('shaking');
+      drawnStickResult.style.display = 'none';
+
       setTimeout(() => {
+        bambooTubeBtn.classList.remove('shaking');
         const randomFortune = fortunesList[Math.floor(Math.random() * fortunesList.length)];
-        fortuneResultText.innerText = randomFortune;
-        fortuneResultText.style.display = 'block';
-        fortunePotBtn.style.animation = "pulse 2s infinite";
-      }, 500);
-    });
-
-    /* Game Hứng Bánh */
-    const gameCanvas = document.getElementById('gameCanvas');
-    const gctx = gameCanvas.getContext('2d');
-    const btnStartGame = document.getElementById('btnStartGame');
-    const gameScoreEl = document.getElementById('gameScore');
-    const gameLivesEl = document.getElementById('gameLives');
-
-    let gameRunning = false, score = 0, lives = 3;
-    let basket = { x: 0, y: 0, width: 60, height: 12 }, items = [], gameLoopId;
-
-    function initGameDimensions() {
-      gameCanvas.width = gameCanvas.clientWidth;
-      gameCanvas.height = 200;
-      basket.y = gameCanvas.height - 18;
-      basket.x = gameCanvas.width / 2 - basket.width / 2;
+        stickTitleText.innerText = randomFortune.title;
+        stickDescText.innerText = `"${randomFortune.desc}"`;
+        drawnStickResult.style.display = 'block';
+      }, 600);
     }
 
-    function startGame() {
-      initGameDimensions();
-      score = 0; lives = 3; items = [];
-      gameRunning = true;
-      gameScoreEl.innerText = score;
-      gameLivesEl.innerText = '❤️❤️❤️';
-      if (gameLoopId) cancelAnimationFrame(gameLoopId);
-      updateGame();
-    }
-
-    function spawnItem() {
-      if (Math.random() < 0.04) {
-        const types = ['🥮', '🥮', '🍡', '💣'];
-        const type = types[Math.floor(Math.random() * types.length)];
-        items.push({ x: Math.random() * (gameCanvas.width - 20), y: -20, speed: 2 + Math.random() * 2.5, type: type });
-      }
-    }
-
-    function updateGame() {
-      if (!gameRunning) return;
-      gctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
-
-      gctx.fillStyle = '#ffc837';
-      gctx.fillRect(basket.x, basket.y, basket.width, basket.height);
-
-      spawnItem();
-      items.forEach((item, idx) => {
-        item.y += item.speed;
-        gctx.font = '18px serif';
-        gctx.fillText(item.type, item.x, item.y);
-
-        if (
-          item.y >= basket.y - 10 && item.y <= basket.y + basket.height &&
-          item.x >= basket.x - 15 && item.x <= basket.x + basket.width
-        ) {
-          if (item.type === '💣') {
-            lives--;
-            gameLivesEl.innerText = '❤️'.repeat(Math.max(0, lives));
-            if (lives <= 0) { gameRunning = false; alert(`Game Over! Bạn đạt được ${score} điểm!`); }
-          } else {
-            score += 10;
-            gameScoreEl.innerText = score;
-          }
-          items.splice(idx, 1);
-        } else if (item.y > gameCanvas.height) {
-          items.splice(idx, 1);
-        }
-      });
-
-      gameLoopId = requestAnimationFrame(updateGame);
-    }
-
-    gameCanvas.addEventListener('mousemove', (e) => {
-      const rect = gameCanvas.getBoundingClientRect();
-      basket.x = e.clientX - rect.left - basket.width / 2;
-    });
-
-    gameCanvas.addEventListener('touchmove', (e) => {
-      const rect = gameCanvas.getBoundingClientRect();
-      if (e.touches[0]) basket.x = e.touches[0].clientX - rect.left - basket.width / 2;
-    });
-
-    btnStartGame.addEventListener('click', startGame);
-    initGameDimensions();
+    bambooTubeBtn.addEventListener('click', shakeAndDrawFortune);
+    btnShakeFortune.addEventListener('click', shakeAndDrawFortune);
   </script>
 </body>
 </html>
