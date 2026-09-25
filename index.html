@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đêm Hội Trăng Rằm - Hội 6 Anh Em Siêu Quậy</title>
+    <title>Đêm Hội Trăng Rằm - Nhóm F6</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Pattaya, Playfair Display, Be Vietnam Pro -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Pattaya&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
@@ -37,7 +37,6 @@
             font-family: 'Playfair Display', serif;
         }
 
-        /* Glowing Text Effects */
         .text-glow-gold {
             text-shadow: 0 0 12px rgba(251, 191, 36, 0.7), 0 0 25px rgba(245, 158, 11, 0.5);
         }
@@ -53,7 +52,6 @@
             border: 1px solid rgba(245, 158, 11, 0.3);
         }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -65,7 +63,6 @@
             border-radius: 4px;
         }
 
-        /* Spinning Vinyl Disc Animation */
         @keyframes spinSlow {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -75,15 +72,9 @@
             animation: spinSlow 6s linear infinite;
         }
 
-        /* Keyframe Animations */
         @keyframes floatSlow {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
             50% { transform: translateY(-10px) rotate(2deg); }
-        }
-
-        @keyframes pulseMoon {
-            0%, 100% { box-shadow: 0 0 50px rgba(254, 240, 138, 0.85), 0 0 100px rgba(253, 224, 71, 0.45); }
-            50% { box-shadow: 0 0 80px rgba(254, 240, 138, 0.95), 0 0 140px rgba(250, 204, 21, 0.65); }
         }
 
         @keyframes shakeStick {
@@ -103,7 +94,6 @@
             animation: shakeStick 0.6s ease-in-out infinite;
         }
 
-        /* Sky Canvas Background */
         #skyCanvas {
             position: fixed;
             top: 0;
@@ -118,45 +108,47 @@
 </head>
 <body class="min-h-screen relative flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950">
 
-    <!-- Interactive Sky Canvas for Stars, Moon, Member Lanterns & Fireworks -->
+    <!-- Tag phát nhạc MP3 có sẵn trong thư mục -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="nhac.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Canvas bầu trời sao, trăng và đèn lồng -->
     <canvas id="skyCanvas"></canvas>
 
-    <!-- Header Navigation -->
+    <!-- Header & Player điều khiển -->
     <header class="relative z-10 w-full px-4 py-4 md:px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-3">
             <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-amber-500 via-amber-400 to-yellow-300 flex items-center justify-center shadow-lg shadow-amber-500/30 text-slate-950 font-bold text-2xl animate-float">
                 🥮
             </div>
             <div>
-                <h1 class="font-pattaya text-2xl sm:text-3xl text-amber-300 tracking-wide text-glow-gold">Hội 6 Anh Em</h1>
+                <h1 class="font-pattaya text-2xl sm:text-3xl text-amber-300 tracking-wide text-glow-gold">Nhóm F6 Trung Thu</h1>
                 <p class="text-xs text-amber-200/80">Thanh Tâm • Quỳnh Như • Quang Hiếu • Huy Vũ • Quỳnh Nga • Thái</p>
             </div>
         </div>
 
-        <!-- Enhanced "Chiếc Đèn Ông Sao" Audio Player Card -->
+        <!-- Trình phát nhạc MP3 -->
         <div class="glass-panel px-4 py-2.5 rounded-2xl flex items-center gap-3 shadow-xl border-amber-500/40 w-full md:w-auto justify-between md:justify-start">
             <div class="flex items-center gap-3">
-                <!-- Spinning Vinyl Record Badge -->
                 <div id="vinylRecord" class="w-10 h-10 rounded-full bg-slate-950 border-2 border-amber-400 flex items-center justify-center relative shadow-inner">
                     <div class="w-3 h-3 rounded-full bg-amber-400 flex items-center justify-center">
                         <div class="w-1 h-1 rounded-full bg-slate-950"></div>
                     </div>
-                    <span class="absolute -top-1 -right-1 text-[10px]">⭐</span>
+                    <span class="absolute -top-1 -right-1 text-[10px]">🎶</span>
                 </div>
                 <div>
                     <h2 class="text-xs font-bold text-amber-300 flex items-center gap-1">
-                        Chiếc Đèn Ông Sao <span class="text-[10px] px-1.5 py-0.2 rounded bg-red-600/80 text-white font-normal">Nhạc Nhóm</span>
+                        Nhạc Trung Thu <span class="text-[10px] px-1.5 py-0.2 rounded bg-red-600/80 text-white font-normal">Auto Play</span>
                     </h2>
-                    <p class="text-[10px] text-gray-300">Đàn Tranh & Trống Hội Trung Thu</p>
+                    <p id="musicStatusText" class="text-[10px] text-gray-300">File: nhac.mp3</p>
                 </div>
             </div>
 
-            <!-- Player Controls -->
             <div class="flex items-center gap-3">
                 <button id="musicToggleBtn" class="w-9 h-9 rounded-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:scale-105 active:scale-95 text-slate-950 font-bold flex items-center justify-center shadow-md transition-all">
                     <i id="musicIcon" class="fa-solid fa-play ml-0.5 text-sm"></i>
                 </button>
-                <!-- Volume Control Slider -->
                 <div class="hidden sm:flex items-center gap-1 text-amber-300/80 text-xs">
                     <i class="fa-solid fa-volume-low text-xs"></i>
                     <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.5" class="w-16 accent-amber-400 cursor-pointer h-1.5 bg-slate-800 rounded-lg">
@@ -167,19 +159,17 @@
 
     <main class="relative z-10 flex-grow max-w-7xl mx-auto w-full px-4 py-4 md:py-6 flex flex-col items-center">
         
-        <!-- Group Hero Title Banner -->
         <section class="text-center my-3 md:my-5 max-w-3xl relative">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs sm:text-sm font-medium mb-3 backdrop-blur-md">
-                <span>🌕</span> Lễ Hội Đêm Trăng Rằm • Gửi 6 Anh Em <span>✨</span>
+                <span>🌕</span> Lễ Hội Đêm Trăng Rằm • Dành Riêng Cho Nhóm F6 <span>✨</span>
             </div>
             <h2 class="font-pattaya text-4xl sm:text-6xl md:text-7xl text-amber-300 text-glow-gold leading-tight mb-3">
-                Trung Thu Xum Vầy <br class="hidden sm:inline" /><span class="text-red-400 font-playfair italic">Chiếc Đèn Ông Sao!</span>
+                Vui Tết Trung Thu <br class="hidden sm:inline" /><span class="text-red-400 font-playfair italic">Hội Anh Em F6!</span>
             </h2>
             <p class="text-gray-300 text-xs sm:text-sm md:text-base leading-relaxed max-w-2xl mx-auto px-2">
-                Bật nhạc nền <strong class="text-amber-300">"Chiếc Đèn Ông Sao"</strong>, nhấp vào chiếc đèn lồng trên bầu trời đêm mang tên <strong class="text-amber-300">Thanh Tâm, Quỳnh Như, Quang Hiếu, Huy Vũ, Quỳnh Nga, Thái</strong> để mở thông điệp bí mật!
+                Nhấp vào từng chiếc đèn lồng trên bầu trời đêm mang tên <strong class="text-amber-300">Thanh Tâm, Quỳnh Như, Quang Hiếu, Huy Vũ, Quỳnh Nga, Thái</strong> để mở thông điệp pháo hoa bí mật!
             </p>
 
-            <!-- Quick Member Avatar Lantern Badges -->
             <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mt-5">
                 <button onclick="triggerMemberLantern('Thanh Tâm')" class="px-3 py-1.5 rounded-xl glass-panel text-xs text-amber-300 hover:bg-amber-500/20 hover:border-amber-400 transition-all flex items-center gap-1.5 shadow-md">
                     🏮 <b>Thanh Tâm</b>
@@ -202,10 +192,10 @@
             </div>
         </section>
 
-        <!-- Interactive Navigation Tabs -->
+        <!-- Navigation Tabs -->
         <div class="w-full max-w-4xl glass-panel rounded-2xl p-2 mb-8 shadow-2xl flex flex-wrap justify-center gap-2 border-amber-500/30">
             <button onclick="switchTab('lantern')" id="tab-lantern" class="tab-btn active flex-1 min-w-[130px] py-2.5 px-3 rounded-xl font-medium text-xs sm:text-sm transition-all flex items-center justify-center gap-2 bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-inner">
-                <i class="fa-solid fa-lightbulb text-amber-400"></i> Đèn Lồng 6 Anh Em
+                <i class="fa-solid fa-lightbulb text-amber-400"></i> Đèn Lồng F6
             </button>
             <button onclick="switchTab('card')" id="tab-card" class="tab-btn flex-1 min-w-[130px] py-2.5 px-3 rounded-xl font-medium text-xs sm:text-sm transition-all flex items-center justify-center gap-2 text-gray-300 hover:text-amber-200 hover:bg-slate-800/50">
                 <i class="fa-solid fa-envelope-open-text text-amber-400"></i> Tạo Thiệp Tặng Bạn
@@ -218,15 +208,14 @@
             </button>
         </div>
 
-        <!-- TAB CONTENT 1: ĐÈN LỒNG 6 THÀNH VIÊN -->
+        <!-- TAB CONTENT 1: ĐÈN LỒNG -->
         <section id="content-lantern" class="tab-content w-full max-w-4xl">
             <div class="glass-panel rounded-3xl p-6 md:p-8 text-center relative overflow-hidden box-glow-gold">
-                <h3 class="font-pattaya text-3xl text-amber-300 mb-2">🏮 Đèn Lồng Đêm Rằm 6 Anh Em 🏮</h3>
+                <h3 class="font-pattaya text-3xl text-amber-300 mb-2">🏮 Đèn Lồng Đêm Rằm Nhóm F6 🏮</h3>
                 <p class="text-xs sm:text-sm text-gray-300 max-w-xl mx-auto mb-6">
-                    Bầu trời đêm rằm tỏa sáng 6 chiếc Đèn Lồng mang tên từng người. Hãy chạm vào đèn lồng tương ứng để ngắm pháo hoa bắn lên và nhận lời chúc riêng!
+                    Chạm vào ô tên bên dưới hoặc chiếc đèn bay trên bầu trời để ngắm pháo hoa tỏa sáng cùng lời chúc riêng!
                 </p>
 
-                <!-- Cards list for quick access to the 6 members -->
                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4 my-6">
                     <div onclick="triggerMemberLantern('Thanh Tâm')" class="p-4 rounded-2xl bg-slate-900/80 border border-amber-500/30 hover:border-amber-400 cursor-pointer transition-all hover:scale-105 text-left group">
                         <div class="flex items-center justify-between mb-2">
@@ -279,11 +268,10 @@
                             <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300">Nhấp Mở</span>
                         </div>
                         <h4 class="font-pattaya text-lg text-amber-300 group-hover:text-yellow-200">Thái (Tớ)</h4>
-                        <p class="text-[11px] text-gray-400 line-clamp-1">Lời cảm ơn tình bạn 6 đứa...</p>
+                        <p class="text-[11px] text-gray-400 line-clamp-1">Lời cảm ơn tình bạn F6...</p>
                     </div>
                 </div>
 
-                <!-- Input area to release extra personalized group lanterns -->
                 <div class="mt-8 pt-6 border-t border-amber-500/20 text-left max-w-xl mx-auto">
                     <h4 class="text-sm font-semibold text-amber-300 mb-3 flex items-center gap-2">
                         <i class="fa-solid fa-paper-plane text-amber-400"></i> Thả Thêm Đèn Ước Nguyện Của Bạn:
@@ -306,16 +294,14 @@
             </div>
         </section>
 
-        <!-- TAB CONTENT 2: BỘ TẠO THIỆP TẶNG BẠN BÈ TRONG NHÓM -->
+        <!-- TAB CONTENT 2: TẠO THIỆP -->
         <section id="content-card" class="tab-content hidden w-full max-w-5xl">
             <div id="wishCardSection" class="glass-panel rounded-3xl p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 
-                <!-- Customizer Controls -->
                 <div class="lg:col-span-5 space-y-4">
                     <h3 class="font-pattaya text-2xl text-amber-300 flex items-center gap-2">
-                        <i class="fa-solid fa-pen-nib text-amber-400 text-xl"></i> Tạo Thiệp Cho Anh Em
+                        <i class="fa-solid fa-pen-nib text-amber-400 text-xl"></i> Tạo Thiệp Cho Anh Em F6
                     </h3>
-                    <p class="text-xs text-gray-300">Chọn tên người nhận trong nhóm 6 đứa mình để tự động điền lời chúc siêu hay!</p>
 
                     <div>
                         <label class="block text-xs font-medium text-amber-200/80 mb-1">Người Gửi (Bạn):</label>
@@ -330,7 +316,7 @@
                             <option value="Quang Hiếu">Quang Hiếu 🎮</option>
                             <option value="Huy Vũ">Huy Vũ 🔥</option>
                             <option value="Quỳnh Nga">Quỳnh Nga 🌺</option>
-                            <option value="Cả Hội 6 Anh Em">Cả Hội 6 Anh Em 🌕</option>
+                            <option value="Cả Nhóm F6">Cả Nhóm F6 🌕</option>
                         </select>
                     </div>
 
@@ -340,35 +326,26 @@
                             <option value="">-- Chọn câu chúc có sẵn --</option>
                             <option value="Chúc bạn Trung thu xinh đẹp, rạng rỡ như ánh trăng rằm, ăn bánh nướng thả ga mà dáng vẫn chuẩn 10/10!">Xinh đẹp & Ăn bánh không tăng cân</option>
                             <option value="Chúc bạn Trung thu phong độ ngút ngàn, gánh team cực mượt, tiền vào như nước, sớm có người yêu!">Phong độ & Gánh team cực mượt</option>
-                            <option value="Gửi cả nhóm 6 đứa mình: Chúc tình bạn của chúng ta mãi bền chặt như nhân bánh nướng thập cẩm, Trung thu nào cũng quây quần bên nhau!">Tình bạn 6 người mãi bền chặt</option>
-                            <option value="Chúc bạn thu sang an lành, thi cử may mắn điểm cao chót vót, vạn sự như ý!">An lành & Thi cử đạt điểm tối đa</option>
+                            <option value="Gửi cả nhóm F6: Chúc tình bạn của chúng ta mãi bền chặt như nhân bánh nướng thập cẩm, Trung thu nào cũng quây quần bên nhau!">Tình bạn F6 mãi bền chặt</option>
                         </select>
                     </div>
 
                     <div>
                         <label class="block text-xs font-medium text-amber-200/80 mb-1">Nội Dung Lời Chúc Mừng:</label>
-                        <textarea id="wishMessageInput" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-amber-500/30 text-amber-100 text-sm focus:outline-none focus:border-amber-400 leading-relaxed" placeholder="Viết lời chúc riêng cho bạn bè tại đây..."></textarea>
+                        <textarea id="wishMessageInput" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-amber-500/30 text-amber-100 text-sm focus:outline-none focus:border-amber-400 leading-relaxed"></textarea>
                     </div>
 
                     <div>
                         <label class="block text-xs font-medium text-amber-200/80 mb-1">Phong Cách Màu Thiệp:</label>
                         <div class="grid grid-cols-3 gap-2">
-                            <button onclick="setCardTheme('theme-gold')" class="py-2 rounded-xl border border-amber-400/50 bg-gradient-to-r from-amber-950 to-slate-900 text-amber-300 text-xs font-medium hover:border-amber-300">
-                                Hoàng Kim
-                            </button>
-                            <button onclick="setCardTheme('theme-red')" class="py-2 rounded-xl border border-red-500/50 bg-gradient-to-r from-red-950 to-slate-900 text-red-300 text-xs font-medium hover:border-red-400">
-                                Đỏ Đèn Lồng
-                            </button>
-                            <button onclick="setCardTheme('theme-night')" class="py-2 rounded-xl border border-blue-500/50 bg-gradient-to-r from-slate-950 to-indigo-950 text-indigo-300 text-xs font-medium hover:border-indigo-400">
-                                Đêm Huyền Diệu
-                            </button>
+                            <button onclick="setCardTheme('theme-gold')" class="py-2 rounded-xl border border-amber-400/50 bg-gradient-to-r from-amber-950 to-slate-900 text-amber-300 text-xs font-medium">Hoàng Kim</button>
+                            <button onclick="setCardTheme('theme-red')" class="py-2 rounded-xl border border-red-500/50 bg-gradient-to-r from-red-950 to-slate-900 text-red-300 text-xs font-medium">Đỏ Đèn Lồng</button>
+                            <button onclick="setCardTheme('theme-night')" class="py-2 rounded-xl border border-blue-500/50 bg-gradient-to-r from-slate-950 to-indigo-950 text-indigo-300 text-xs font-medium">Đêm Huyền Diệu</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Live Card Preview & Action Buttons -->
                 <div class="lg:col-span-7 flex flex-col items-center">
-                    <!-- Visual Card Preview Display -->
                     <div id="cardPreview" class="theme-gold w-full max-w-md aspect-[4/5] rounded-2xl p-6 sm:p-8 relative flex flex-col justify-between shadow-2xl border-2 border-amber-400/60 overflow-hidden bg-gradient-to-b from-slate-950 via-amber-950/40 to-slate-950 transition-all">
                         <div class="absolute inset-2 border border-amber-500/30 rounded-xl pointer-events-none"></div>
                         <div class="absolute top-4 left-4 text-amber-400/60 text-xl">🏮</div>
@@ -376,49 +353,44 @@
                         <div class="absolute bottom-4 left-4 text-amber-400/60 text-xl">🥮</div>
                         <div class="absolute bottom-4 right-4 text-amber-400/60 text-xl">🐇</div>
 
-                        <!-- Card Header -->
                         <div class="text-center pt-2 relative z-10">
-                            <span class="text-[10px] sm:text-xs tracking-widest text-amber-400/80 uppercase font-semibold">Tết Trung Thu • Hội 6 Anh Em</span>
+                            <span class="text-[10px] sm:text-xs tracking-widest text-amber-400/80 uppercase font-semibold">Tết Trung Thu • Nhóm F6</span>
                             <h4 class="font-pattaya text-3xl sm:text-4xl text-amber-300 text-glow-gold mt-1">Thiệp Trăng Rằm</h4>
                             <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mt-2"></div>
                         </div>
 
-                        <!-- Card Body (Message) -->
                         <div class="my-auto py-4 text-center relative z-10">
-                            <p class="text-xs text-amber-200/70 mb-2 font-medium">Thân gửi người bạn thân: <span id="cardRecipientDisplay" class="text-amber-300 font-bold text-sm">Thanh Tâm</span> ✨</p>
+                            <p class="text-xs text-amber-200/70 mb-2 font-medium">Thân gửi: <span id="cardRecipientDisplay" class="text-amber-300 font-bold text-sm">Thanh Tâm</span> ✨</p>
                             <p id="cardMessageDisplay" class="font-playfair text-base sm:text-lg italic text-yellow-100 leading-relaxed px-2 my-2">
-                                "Chúc bạn Trung thu xinh xắn rạng rỡ, học giỏi xuất sắc, ăn bánh nướng bánh dẻo thả ga mà vòng eo vẫn đẹp 10/10!"
+                                "Chúc bạn Trung thu xinh xắn rạng rỡ, học giỏi xuất sắc!"
                             </p>
                         </div>
 
-                        <!-- Card Footer -->
                         <div class="text-right pb-2 pr-2 relative z-10 border-t border-amber-500/20 pt-3">
                             <p class="text-xs text-amber-300/80">Từ người bạn trong nhóm:</p>
                             <p id="cardSenderDisplay" class="font-pattaya text-xl text-amber-300 text-glow-gold">Thái</p>
                         </div>
                     </div>
 
-                    <!-- Action Buttons -->
                     <div class="flex flex-wrap gap-3 justify-center w-full mt-6">
                         <button onclick="copyCardText()" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs sm:text-sm font-semibold border border-amber-500/40 transition-all flex items-center gap-2">
                             <i class="fa-solid fa-copy"></i> Sao Chép Lời Chúc
                         </button>
                         <button onclick="downloadCardImage()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 text-xs sm:text-sm font-bold shadow-lg shadow-amber-500/30 transition-all flex items-center gap-2">
-                            <i class="fa-solid fa-download"></i> Tải Ảnh Thiệp PNG (Gửi Group)
+                            <i class="fa-solid fa-download"></i> Tải Ảnh Thiệp PNG
                         </button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- TAB CONTENT 3: BỐC QUẺ MAY MẮN TRUNG THU HỘI BẠN THÂN -->
+        <!-- TAB CONTENT 3: QUẺ MAY MẮN -->
         <section id="content-fortune" class="tab-content hidden w-full max-w-4xl">
             <div class="glass-panel rounded-3xl p-6 md:p-10 text-center relative overflow-hidden box-glow-gold">
-                <h3 class="font-pattaya text-3xl text-amber-300 mb-2">🧧 Quẻ May Mắn 6 Anh Em 🧧</h3>
-                <p class="text-xs sm:text-sm text-gray-300 mb-6">Lắc ống quẻ Trung Thu xem thần may mắn gọi tên ai trong nhóm mình hôm nay!</p>
+                <h3 class="font-pattaya text-3xl text-amber-300 mb-2">🧧 Quẻ May Mắn Nhóm F6 🧧</h3>
+                <p class="text-xs sm:text-sm text-gray-300 mb-6">Lắc ống quẻ xem vận may Trung Thu dành riêng cho bạn hôm nay!</p>
 
                 <div class="flex flex-col items-center justify-center my-6">
-                    <!-- Shaker Tube Graphic -->
                     <div id="stickHolder" class="relative w-32 h-48 sm:w-40 sm:h-56 bg-gradient-to-b from-amber-800 to-amber-950 border-4 border-amber-500/60 rounded-b-3xl rounded-t-lg shadow-2xl flex items-center justify-center cursor-pointer transition-transform hover:scale-105" onclick="drawFortune()">
                         <div class="absolute -top-10 flex gap-1 justify-center w-full px-2">
                             <div class="w-2.5 h-16 bg-amber-200 rounded-t border border-amber-600 shadow"></div>
@@ -431,7 +403,7 @@
                             <div class="w-12 h-12 mx-auto rounded-full bg-amber-500/20 border border-amber-400 flex items-center justify-center text-2xl text-amber-300 mb-1">
                                 🥮
                             </div>
-                            <span class="text-[10px] font-bold text-amber-200 uppercase tracking-widest block">Quẻ Anh Em</span>
+                            <span class="text-[10px] font-bold text-amber-200 uppercase tracking-widest block">Quẻ F6</span>
                         </div>
                     </div>
                 </div>
@@ -440,14 +412,13 @@
                     <i class="fa-solid fa-hand-sparkles mr-2"></i> Lắc Ống Bốc Quẻ
                 </button>
 
-                <!-- Fortune Stick Result Box -->
                 <div id="fortuneResult" class="hidden mt-4 p-6 rounded-2xl bg-slate-900/90 border border-amber-400/50 text-left relative animate-fadeIn max-w-xl mx-auto">
                     <div class="flex items-center justify-between border-b border-amber-500/30 pb-3 mb-3">
                         <span id="fortuneTitle" class="font-pattaya text-xl text-amber-300">✨ Quẻ Đại Cát #01</span>
-                        <span class="text-xs px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40">Hội 6 Anh Em</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40">F6 Squad</span>
                     </div>
                     <p id="fortuneText" class="text-base sm:text-lg text-yellow-100 italic leading-relaxed my-4 text-center font-playfair">
-                        "Quẻ Đại Cát: Bạn được nhận đặc quyền ăn 10 cái bánh nướng thập cẩm mà không tốn 1 gram mỡ thừa nào!"
+                        "Quẻ Đại Cát..."
                     </p>
                     <div class="flex flex-wrap gap-3 justify-end pt-2">
                         <button onclick="copyFortune()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs font-medium border border-amber-500/30 transition-all">
@@ -461,13 +432,13 @@
             </div>
         </section>
 
-        <!-- TAB CONTENT 4: MINI GAME THỎ NGỌC HỨNG BÁNH TRUNG THU -->
+        <!-- TAB CONTENT 4: MINI GAME -->
         <section id="content-game" class="tab-content hidden w-full max-w-4xl">
             <div class="glass-panel rounded-3xl p-4 sm:p-6 text-center relative overflow-hidden box-glow-gold">
                 <div class="flex items-center justify-between flex-wrap gap-2 mb-4 px-2">
                     <div>
                         <h3 class="font-pattaya text-2xl sm:text-3xl text-amber-300 text-left">🥮 Thỏ Ngọc Hứng Bánh</h3>
-                        <p class="text-xs text-gray-300 text-left">Hứng thật nhiều bánh nướng & sao may mắn để ghi điểm kỷ lục nhóm!</p>
+                        <p class="text-xs text-gray-300 text-left">Hứng bánh nướng để vượt kỷ lục nhóm F6!</p>
                     </div>
                     <div class="flex items-center gap-4 text-xs sm:text-sm font-bold bg-slate-900/80 px-4 py-2 rounded-xl border border-amber-500/30">
                         <div>Điểm: <span id="gameScore" class="text-amber-300 text-lg">0</span></div>
@@ -476,24 +447,21 @@
                     </div>
                 </div>
 
-                <!-- Game Canvas Container -->
                 <div class="relative w-full aspect-[4/3] max-h-[420px] bg-slate-950 rounded-2xl border-2 border-amber-500/40 overflow-hidden shadow-2xl mx-auto touch-none">
                     <canvas id="gameCanvas" class="w-full h-full block cursor-pointer"></canvas>
                     
-                    <!-- Game Start Overlay -->
                     <div id="gameOverlay" class="absolute inset-0 bg-slate-950/90 backdrop-blur-sm flex flex-col items-center justify-center p-6 z-20">
                         <div class="w-16 h-16 rounded-full bg-amber-500/20 border border-amber-400 flex items-center justify-center text-3xl mb-3">
                             🐇
                         </div>
                         <h4 id="gameOverlayTitle" class="font-pattaya text-3xl text-amber-300 mb-2">Thỏ Ngọc Hứng Bánh</h4>
-                        <p id="gameOverlayDesc" class="text-xs sm:text-sm text-gray-300 mb-6 max-w-xs">Di chuyển chuột, chạm vuốt màn hình hoặc nút bấm ◄ ► để giỏ Thỏ Ngọc hứng nhiều bánh nhất!</p>
+                        <p id="gameOverlayDesc" class="text-xs sm:text-sm text-gray-300 mb-6 max-w-xs">Di chuyển chuột, chạm vuốt hoặc nhấn ◄ ► để giỏ Thỏ Ngọc hứng nhiều bánh nhất!</p>
                         <button id="startGameBtn" onclick="initAndStartGame()" class="px-8 py-3 rounded-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-bold text-base shadow-lg shadow-amber-500/30 transition-all hover:scale-105">
                             <i class="fa-solid fa-play mr-2"></i> Bắt Đầu Chơi
                         </button>
                     </div>
                 </div>
 
-                <!-- Mobile controls -->
                 <div class="mt-4 flex justify-center gap-6 sm:hidden">
                     <button id="btnLeft" class="w-16 h-12 bg-slate-800 border border-amber-500/40 rounded-xl text-amber-300 text-xl active:bg-amber-500 active:text-slate-950">◄</button>
                     <button id="btnRight" class="w-16 h-12 bg-slate-800 border border-amber-500/40 rounded-xl text-amber-300 text-xl active:bg-amber-500 active:text-slate-950">►</button>
@@ -503,7 +471,7 @@
 
     </main>
 
-    <!-- Member Dedicated Wish Modal -->
+    <!-- Modal Lời Chúc Riêng Từng Thành Viên -->
     <div id="memberModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 hidden animate-fadeIn">
         <div class="glass-panel max-w-md w-full rounded-3xl p-6 sm:p-8 relative border-2 border-amber-400/80 text-center box-glow-gold">
             <button onclick="closeMemberModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800 border border-amber-500/40 text-amber-300 hover:text-white flex items-center justify-center">
@@ -514,13 +482,13 @@
                 🏮
             </div>
 
-            <span class="text-xs text-amber-400/80 uppercase font-semibold tracking-widest block">Đèn Lồng Lời Chúc Riêng</span>
+            <span class="text-xs text-amber-400/80 uppercase font-semibold tracking-widest block">Đèn Lồng Lời Chúc F6</span>
             <h3 id="modalMemberName" class="font-pattaya text-3xl sm:text-4xl text-amber-300 text-glow-gold my-2">Thanh Tâm</h3>
 
             <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto my-3"></div>
 
             <p id="modalMemberWish" class="font-playfair text-base sm:text-lg italic text-yellow-100 leading-relaxed my-4">
-                "Chúc Thanh Tâm Trung Thu xinh xắn rạng rỡ, học giỏi xuất sắc, ăn bánh nướng bánh dẻo thả ga mà vòng eo vẫn đẹp 10/10!"
+                "Chúc bạn Trung Thu rạng rỡ!"
             </p>
 
             <div class="flex flex-col sm:flex-row gap-2 mt-6">
@@ -536,233 +504,76 @@
 
     <!-- Footer -->
     <footer class="relative z-10 w-full text-center py-5 border-t border-amber-500/10 text-xs text-amber-200/50">
-        <p>Gửi Trọn Yêu Thương Tới Hội 6 Anh Em: Thanh Tâm • Quỳnh Như • Quang Hiếu • Huy Vũ • Quỳnh Nga • Thái 🌕✨</p>
+        <p>Gửi Trọn Yêu Thương Tới Nhóm F6: Thanh Tâm • Quỳnh Như • Quang Hiếu • Huy Vũ • Quỳnh Nga • Thái 🌕✨</p>
     </footer>
 
     <script>
         /* =========================================================================
-           1. "CHIẾC ĐÈN ÔNG SAO" WEB AUDIO SYNTHESIZER (WebAudio API Engine)
-           Synthesizes exact melody + festive percussion (Tùng Rinh Rinh)
+           1. KHỞI TẠO AUDIO MP3 & XỬ LÝ AUTOPLAY
            ========================================================================= */
-        class ChiecDenOngSaoSynth {
-            constructor() {
-                this.ctx = null;
-                this.isPlaying = false;
-                this.noteTimer = null;
-                this.currentStep = 0;
-                this.masterGain = null;
-                this.volume = 0.5;
+        const bgMusic = document.getElementById('bgMusic');
+        const musicToggleBtn = document.getElementById('musicToggleBtn');
+        const musicIcon = document.getElementById('musicIcon');
+        const vinylRecord = document.getElementById('vinylRecord');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const musicStatusText = document.getElementById('musicStatusText');
 
-                // Frequencies (C Major Scale mapping)
-                this.notesFreq = {
-                    'C4': 261.63, 'D4': 293.66, 'E4': 329.63, 'F4': 349.23, 'G4': 392.00, 'A4': 440.00,
-                    'C5': 523.25, 'D5': 587.33, 'E5': 659.25, 'G5': 783.99, 'A5': 880.00, 'C6': 1046.50
-                };
+        bgMusic.volume = 0.5;
 
-                // "Chiếc Đèn Ông Sao" Full Note Sequence [noteName, beatDuration, isDrumBeat]
-                this.score = [
-                    // --- Câu 1: Chiếc đèn ông sao sao 5 cánh tươi màu ---
-                    ['G4', 0.5, false], ['G4', 0.5, false], ['C5', 0.5, false], ['C5', 0.5, false],
-                    ['C5', 0.5, false], ['D5', 0.5, false], ['E5', 1.0, false], ['C5', 0.5, false], ['G4', 0.5, false],
-                    ['C5', 0.5, false], ['C5', 0.5, false], ['A4', 0.5, false], ['G4', 0.5, false],
-                    ['A4', 0.5, false], ['G4', 0.5, false], ['E4', 0.5, false], ['G4', 1.0, false],
-
-                    // --- Câu 2: Cán đây rất dài cán cao qua đầu ---
-                    ['G4', 0.5, false], ['G4', 0.5, false], ['C5', 0.5, false], ['C5', 0.5, false],
-                    ['C5', 0.5, false], ['D5', 0.5, false], ['E5', 1.0, false], ['C5', 0.5, false], ['G4', 0.5, false],
-                    ['C5', 0.5, false], ['C5', 0.5, false], ['A4', 0.5, false], ['G4', 0.5, false],
-                    ['A4', 0.5, false], ['G4', 0.5, false], ['E4', 0.5, false], ['C4', 1.0, false],
-
-                    // --- Câu 3: Em cầm đèn sao em hát ca vui ---
-                    ['E4', 0.5, false], ['G4', 0.5, false], ['E4', 0.5, false], ['G4', 0.5, false],
-                    ['C5', 0.75, false], ['C5', 0.25, false], ['A4', 0.5, false], ['G4', 1.0, false],
-
-                    // --- Câu 4: Đèn đèn ông sao với ánh Bác Hồ ---
-                    ['E4', 0.5, false], ['G4', 0.5, false], ['E4', 0.5, false], ['G4', 0.5, false],
-                    ['C5', 0.5, false], ['D5', 0.5, false], ['C5', 1.5, false],
-
-                    // --- Điệp Khúc: Tùng rinh rinh, tùng tùng tùng rinh rinh ---
-                    ['TUNG', 0.5, true], ['RINH', 0.25, true], ['RINH', 0.25, true],
-                    ['TUNG', 0.5, true], ['TUNG', 0.5, true], ['TUNG', 0.5, true], ['RINH', 0.25, true], ['RINH', 0.25, true],
-                    ['G5', 0.5, false], ['E5', 0.5, false], ['C5', 0.5, false], ['D5', 0.5, false], ['C5', 1.0, false],
-
-                    // --- Đây ánh sao vui chiếu xa sáng ngời ---
-                    ['E4', 0.5, false], ['G4', 0.5, false], ['C5', 0.5, false], ['D5', 0.5, false],
-                    ['E5', 0.5, false], ['G5', 0.5, false], ['E5', 0.5, false], ['D5', 0.5, false], ['C5', 1.5, false],
-
-                    // --- Đoạn trống hội kết thúc phiên khúc ---
-                    ['TUNG', 0.5, true], ['RINH', 0.25, true], ['RINH', 0.25, true], ['TUNG', 1.0, true]
-                ];
-            }
-
-            initCtx() {
-                if (!this.ctx) {
-                    const AudioContext = window.AudioContext || window.webkitAudioContext;
-                    this.ctx = new AudioContext();
-                    this.masterGain = this.ctx.createGain();
-                    this.masterGain.gain.setValueAtTime(this.volume, this.ctx.currentTime);
-                    this.masterGain.connect(this.ctx.destination);
-                }
-            }
-
-            setVolume(val) {
-                this.volume = val;
-                if (this.masterGain && this.ctx) {
-                    this.masterGain.gain.setValueAtTime(this.volume, this.ctx.currentTime);
-                }
-            }
-
-            // Plucked Zither / Flute Instrument Sound
-            playMelodyNote(noteName, durationInSeconds) {
-                if (!this.ctx || !this.notesFreq[noteName]) return;
-
-                const freq = this.notesFreq[noteName];
-                const now = this.ctx.currentTime;
-
-                // Main Harmonic Oscillator
-                const osc = this.ctx.createOscillator();
-                const gain = this.ctx.createGain();
-
-                // Bright triangle wave for oriental guzheng/flute resonance
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(freq, now);
-
-                // Sub-harmonic shimmer
-                const subOsc = this.ctx.createOscillator();
-                subOsc.type = 'sine';
-                subOsc.frequency.setValueAtTime(freq * 2, now);
-                const subGain = this.ctx.createGain();
-                subGain.gain.setValueAtTime(0.15, now);
-                subGain.gain.exponentialRampToValueAtTime(0.001, now + durationInSeconds);
-
-                subOsc.connect(subGain);
-                subGain.connect(this.masterGain);
-
-                // Attack, Decay, Sustain, Release Envelope
-                gain.gain.setValueAtTime(0, now);
-                gain.gain.linearRampToValueAtTime(0.22, now + 0.04);
-                gain.gain.exponentialRampToValueAtTime(0.0001, now + durationInSeconds * 1.3);
-
-                osc.connect(gain);
-                gain.connect(this.masterGain);
-
-                osc.start(now);
-                subOsc.start(now);
-                osc.stop(now + durationInSeconds * 1.4);
-                subOsc.stop(now + durationInSeconds * 1.4);
-            }
-
-            // Traditional Festival Drum "Tùng" & Cymbal "Rinh"
-            playDrum(type) {
-                if (!this.ctx) return;
-                const now = this.ctx.currentTime;
-
-                if (type === 'TUNG') {
-                    // Deep Bass Drum
-                    const osc = this.ctx.createOscillator();
-                    const gain = this.ctx.createGain();
-
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(140, now);
-                    osc.frequency.exponentialRampToValueAtTime(38, now + 0.35);
-
-                    gain.gain.setValueAtTime(0.6, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
-
-                    osc.connect(gain);
-                    gain.connect(this.masterGain);
-                    osc.start(now);
-                    osc.stop(now + 0.4);
-                } else if (type === 'RINH') {
-                    // High Cymbal / Ringing Chime
-                    const osc = this.ctx.createOscillator();
-                    const gain = this.ctx.createGain();
-
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(1046.5, now); // C6 Note
-                    osc.frequency.linearRampToValueAtTime(1500, now + 0.15);
-
-                    gain.gain.setValueAtTime(0.2, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
-
-                    osc.connect(gain);
-                    gain.connect(this.masterGain);
-                    osc.start(now);
-                    osc.stop(now + 0.2);
-                }
-            }
-
-            step() {
-                if (!this.isPlaying) return;
-
-                const item = this.score[this.currentStep];
-                const noteName = item[0];
-                const beats = item[1];
-                const isDrum = item[2];
-
-                const tempoBPM = 138; // Upbeat festive tempo
-                const beatDurationSec = (60 / tempoBPM) * beats;
-
-                if (isDrum) {
-                    this.playDrum(noteName);
-                } else {
-                    this.playMelodyNote(noteName, beatDurationSec);
-                    // Accompany soft background bass drum every 2 beats
-                    if (this.currentStep % 4 === 0) {
-                        this.playDrum('TUNG');
-                    }
-                }
-
-                this.currentStep = (this.currentStep + 1) % this.score.length;
-                this.noteTimer = setTimeout(() => this.step(), beatDurationSec * 1000);
-            }
-
-            toggle() {
-                this.initCtx();
-                if (this.ctx && this.ctx.state === 'suspended') {
-                    this.ctx.resume();
-                }
-
-                this.isPlaying = !this.isPlaying;
-
-                const musicIcon = document.getElementById('musicIcon');
-                const vinyl = document.getElementById('vinylRecord');
-
-                if (this.isPlaying) {
-                    musicIcon.className = "fa-solid fa-pause text-slate-950 text-sm";
-                    vinyl.classList.add('animate-spin-slow');
-                    this.step();
-                } else {
-                    musicIcon.className = "fa-solid fa-play ml-0.5 text-slate-950 text-sm";
-                    vinyl.classList.remove('animate-spin-slow');
-                    if (this.noteTimer) clearTimeout(this.noteTimer);
-                }
-            }
+        // Hàm bật nhạc
+        function startAudio() {
+            bgMusic.play().then(() => {
+                musicIcon.className = "fa-solid fa-pause text-slate-950 text-sm";
+                vinylRecord.classList.add('animate-spin-slow');
+                if (musicStatusText) musicStatusText.innerText = "Đang phát nhạc";
+            }).catch(error => {
+                console.log("Trình duyệt tạm dừng autoplay. Chờ tương tác từ người dùng.");
+            });
         }
 
-        const audioSynth = new ChiecDenOngSaoSynth();
-
-        document.getElementById('musicToggleBtn').addEventListener('click', (e) => {
-            e.stopPropagation();
-            audioSynth.toggle();
+        // Tự động phát ngay khi trang tải xong
+        window.addEventListener('load', () => {
+            startAudio();
         });
 
-        document.getElementById('volumeSlider').addEventListener('input', (e) => {
-            audioSynth.setVolume(parseFloat(e.target.value));
-        });
-
-        // Auto unlock audio on user first tap anywhere
-        window.addEventListener('click', function unlockAudioOnce() {
-            audioSynth.initCtx();
-            if (audioSynth.ctx && audioSynth.ctx.state === 'suspended') {
-                audioSynth.ctx.resume();
+        // Bật nhạc ngay khi người dùng chạm/nhấp vào bất kỳ điểm nào trên màn hình
+        const unlockAudioOnUserInteraction = () => {
+            if (bgMusic.paused) {
+                startAudio();
             }
-            window.removeEventListener('click', unlockAudioOnce);
-        }, { once: true });
+            ['click', 'touchstart', 'keydown', 'pointerdown'].forEach(evt => {
+                document.removeEventListener(evt, unlockAudioOnUserInteraction);
+            });
+        };
+
+        ['click', 'touchstart', 'keydown', 'pointerdown'].forEach(evt => {
+            document.addEventListener(evt, unlockAudioOnUserInteraction, { once: true });
+        });
+
+        // Nút Bật/Tắt Nhạc
+        musicToggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicIcon.className = "fa-solid fa-pause text-slate-950 text-sm";
+                vinylRecord.classList.add('animate-spin-slow');
+                if (musicStatusText) musicStatusText.innerText = "Đang phát nhạc";
+            } else {
+                bgMusic.pause();
+                musicIcon.className = "fa-solid fa-play ml-0.5 text-slate-950 text-sm";
+                vinylRecord.classList.remove('animate-spin-slow');
+                if (musicStatusText) musicStatusText.innerText = "Tạm dừng";
+            }
+        });
+
+        // Thanh chỉnh Âm lượng
+        volumeSlider.addEventListener('input', (e) => {
+            bgMusic.volume = parseFloat(e.target.value);
+        });
 
 
         /* =========================================================================
-           2. SKY CANVAS BACKGROUND ENGINE (Stars, Moon, Member Floating Lanterns & Fireworks)
+           2. SKY CANVAS (Mặt trăng, sao, đèn lồng F6, pháo hoa)
            ========================================================================= */
         const canvas = document.getElementById('skyCanvas');
         const ctx = canvas.getContext('2d');
@@ -777,7 +588,6 @@
             positionMemberLanterns();
         });
 
-        // Twinkling stars
         let stars = [];
         function initStars() {
             stars = [];
@@ -793,17 +603,15 @@
             }
         }
 
-        // Dedicated Wishes Data for 6 Group Members
         const groupWishes = {
             "Thanh Tâm": "Chúc Thanh Tâm Trung Thu xinh xắn rạng rỡ, học giỏi xuất sắc, ăn bánh nướng bánh dẻo thả ga mà vòng eo vẫn đẹp 10/10!",
             "Quỳnh Như": "Chúc Quỳnh Như luôn tươi tắn rạng rỡ như Hằng Nga, tràn ngập năng lượng tích cực, thi cử mượt mà điểm cao chót vót!",
             "Quang Hiếu": "Chúc Quang Hiếu ngày càng đẹp trai phong độ, gánh team chơi game siêu mượt, tiền tài rủng rỉnh và sớm tìm được 'Chị Hằng' đời mình!",
             "Huy Vũ": "Chúc Huy Vũ đẹp trai 10 điểm không có nhưng, luôn luôn vui vẻ, bứt phá mọi mục tiêu và gặt hái cực kỳ nhiều thành công!",
             "Quỳnh Nga": "Chúc Quỳnh Nga luôn dịu dàng xinh đẹp, học tập thi cử may mắn đạt tối đa mọi điểm số, lúc nào cũng cười tươi như hoa!",
-            "Doãn Thái": "Cảm ơn 5 người bạn tuyệt vời đã luôn đồng hành cùng Thái! Chúc cho nhóm 6 đứa mình mãi bền chặt, Trung Thu năm nào cũng quây quần bên nhau!"
+            "Doãn Thái": "Cảm ơn 5 người bạn tuyệt vời trong nhóm F6 đã luôn đồng hành cùng Thái! Chúc cho cả nhóm mình mãi bền chặt, Trung Thu nào cũng quây quần vui vẻ!"
         };
 
-        // Persistent member lanterns floating in the sky
         let memberLanterns = [];
         const memberNames = ["Thanh Tâm", "Quỳnh Như", "Quang Hiếu", "Huy Vũ", "Quỳnh Nga", "Doãn Thái"];
 
@@ -827,11 +635,9 @@
             });
         }
 
-        // Dynamic extra sky lanterns
         let extraLanterns = [];
-
-        // Fireworks particles on lantern click
         let particles = [];
+
         function createFireworks(x, y) {
             const colors = ['#fbbf24', '#f59e0b', '#ef4444', '#38bdf8', '#a855f7'];
             for (let i = 0; i < 40; i++) {
@@ -854,7 +660,6 @@
             const moonY = Math.min(height * 0.18, 140);
             const moonRadius = Math.min(width, height) * 0.08 + 22;
 
-            // Halo Glow
             const glow = ctx.createRadialGradient(moonX, moonY, moonRadius * 0.8, moonX, moonY, moonRadius * 2.6);
             glow.addColorStop(0, 'rgba(254, 240, 138, 0.45)');
             glow.addColorStop(0.5, 'rgba(251, 191, 36, 0.15)');
@@ -865,7 +670,6 @@
             ctx.arc(moonX, moonY, moonRadius * 2.6, 0, Math.PI * 2);
             ctx.fill();
 
-            // Moon Base Gradient
             const moonGrad = ctx.createRadialGradient(moonX - moonRadius * 0.3, moonY - moonRadius * 0.3, 5, moonX, moonY, moonRadius);
             moonGrad.addColorStop(0, '#fffbeb');
             moonGrad.addColorStop(0.7, '#fef08a');
@@ -878,7 +682,6 @@
         }
 
         function renderLantern(l, isMember = false) {
-            // Glow
             const lGlow = ctx.createRadialGradient(l.x, l.y, 2, l.x, l.y, l.radius * 2.2);
             lGlow.addColorStop(0, 'rgba(253, 224, 71, 0.85)');
             lGlow.addColorStop(0.5, 'rgba(239, 68, 68, 0.35)');
@@ -889,24 +692,20 @@
             ctx.arc(l.x, l.y, l.radius * 2.2, 0, Math.PI * 2);
             ctx.fill();
 
-            // Lantern Body
             ctx.fillStyle = isMember ? '#dc2626' : '#ea580c';
             ctx.beginPath();
             ctx.roundRect(l.x - l.radius * 0.7, l.y - l.radius, l.radius * 1.4, l.radius * 1.8, 8);
             ctx.fill();
 
-            // Gold Trim Line
             ctx.strokeStyle = '#fde047';
             ctx.lineWidth = 1.5;
             ctx.strokeRect(l.x - l.radius * 0.7, l.y - l.radius, l.radius * 1.4, l.radius * 1.8);
 
-            // Core Flame
             ctx.fillStyle = '#fef08a';
             ctx.beginPath();
             ctx.arc(l.x, l.y + l.radius * 0.2, l.radius * 0.35, 0, Math.PI * 2);
             ctx.fill();
 
-            // Member Tag Text
             ctx.font = 'bold 12px "Be Vietnam Pro"';
             ctx.fillStyle = '#fde047';
             ctx.textAlign = 'center';
@@ -916,7 +715,6 @@
         function animateSky() {
             ctx.clearRect(0, 0, width, height);
 
-            // Draw Stars
             stars.forEach(star => {
                 star.alpha += star.speed;
                 if (star.alpha > 1 || star.alpha < 0) star.speed = -star.speed;
@@ -926,36 +724,27 @@
                 ctx.fill();
             });
 
-            // Draw Moon
             drawMoon();
 
-            // Draw Member Floating Lanterns
             memberLanterns.forEach(l => {
                 l.angle += l.swaySpeed;
                 l.x += Math.sin(l.angle) * 0.4;
                 l.y += Math.cos(l.angle) * 0.2;
-
                 renderLantern(l, true);
             });
 
-            // Extra Floating Lanterns
             extraLanterns.forEach((l, index) => {
                 l.y -= l.speedY;
                 l.angle += l.swaySpeed;
                 l.x += Math.sin(l.angle) * l.swayAmount;
-
                 renderLantern(l, false);
-
-                if (l.y < -60) {
-                    extraLanterns.splice(index, 1);
-                }
+                if (l.y < -60) extraLanterns.splice(index, 1);
             });
 
-            // Render Fireworks Particles
             particles.forEach((p, index) => {
                 p.x += p.vx;
                 p.y += p.vy;
-                p.vy += 0.05; // gravity
+                p.vy += 0.05;
                 p.alpha -= 0.02;
 
                 ctx.fillStyle = p.color;
@@ -975,7 +764,6 @@
         positionMemberLanterns();
         animateSky();
 
-        // Canvas Click Handler to open Member Modal when clicked on their lantern
         canvas.addEventListener('click', (e) => {
             const rect = canvas.getBoundingClientRect();
             const clickX = e.clientX - rect.left;
@@ -1043,11 +831,11 @@
             });
 
             document.getElementById('extraWishInput').value = "";
-            showNotification(`🏮 Đèn lồng tâm nguyện của ${name} đã bay lên trời!`);
+            showNotification(`🏮 Đèn lồng ước nguyện của ${name} đã bay lên trời!`);
         }
 
         /* =========================================================================
-           3. CARD CREATOR & CANVAS EXPORT ENGINE
+           3. TẠO THIỆP & TẢI ẢNH PNG
            ========================================================================= */
         const senderInput = document.getElementById('senderInput');
         const recipientSelect = document.getElementById('recipientSelect');
@@ -1057,8 +845,8 @@
             const selected = recipientSelect.value;
             if (groupWishes[selected]) {
                 wishMessageInput.value = groupWishes[selected];
-            } else if (selected === "Cả Hội 6 Anh Em") {
-                wishMessageInput.value = "Gửi cả nhóm 6 đứa mình: Chúc tình bạn của chúng ta mãi bền chặt như nhân bánh nướng thập cẩm, Trung thu nào cũng quây quần vui vẻ bên nhau!";
+            } else if (selected === "Cả Nhóm F6") {
+                wishMessageInput.value = "Gửi cả nhóm F6: Chúc tình bạn của chúng ta mãi bền chặt như nhân bánh nướng thập cẩm, Trung thu nào cũng quây quần vui vẻ bên nhau!";
             }
             updateCardDisplay();
         }
@@ -1071,7 +859,7 @@
 
         senderInput.addEventListener('input', updateCardDisplay);
         wishMessageInput.addEventListener('input', updateCardDisplay);
-        applyRecipientPreset(); // Init default fill
+        applyRecipientPreset();
 
         function selectPresetWish() {
             const val = document.getElementById('presetWishes').value;
@@ -1084,7 +872,6 @@
         function setCardTheme(themeClass) {
             const card = document.getElementById('cardPreview');
             card.className = `${themeClass} w-full max-w-md aspect-[4/5] rounded-2xl p-6 sm:p-8 relative flex flex-col justify-between shadow-2xl border-2 border-amber-400/60 overflow-hidden transition-all `;
-            
             if (themeClass === 'theme-gold') {
                 card.classList.add('bg-gradient-to-b', 'from-slate-950', 'via-amber-950/40', 'to-slate-950');
             } else if (themeClass === 'theme-red') {
@@ -1095,7 +882,7 @@
         }
 
         function copyCardText() {
-            const fullText = `Thân gửi ${recipientSelect.value},\n${wishMessageInput.value}\n- Từ ${senderInput.value} (Hội 6 Anh Em Trung Thu 2026)`;
+            const fullText = `Thân gửi ${recipientSelect.value},\n${wishMessageInput.value}\n- Từ ${senderInput.value} (Nhóm F6 Trung Thu 2026)`;
             copyToClipboard(fullText);
             showNotification("Đã sao chép lời chúc thành công!");
         }
@@ -1106,7 +893,6 @@
             c.height = 750;
             const cx = c.getContext('2d');
 
-            // Background Gradient
             const bgGrad = cx.createLinearGradient(0, 0, 0, 750);
             bgGrad.addColorStop(0, '#020617');
             bgGrad.addColorStop(0.5, '#451a03');
@@ -1114,31 +900,23 @@
             cx.fillStyle = bgGrad;
             cx.fillRect(0, 0, 600, 750);
 
-            // Borders
             cx.strokeStyle = '#fbbf24';
             cx.lineWidth = 4;
             cx.strokeRect(20, 20, 560, 710);
 
-            cx.strokeStyle = 'rgba(251, 191, 36, 0.4)';
-            cx.lineWidth = 1;
-            cx.strokeRect(30, 30, 540, 690);
-
-            // Header
             cx.fillStyle = '#fde047';
             cx.font = 'bold 18px "Be Vietnam Pro"';
             cx.textAlign = 'center';
-            cx.fillText('TRUNG THU • HỘI 6 ANH EM', 300, 80);
+            cx.fillText('TRUNG THU • NHÓM F6', 300, 80);
 
             cx.fillStyle = '#fbbf24';
             cx.font = 'bold 42px "Pattaya", cursive';
             cx.fillText('Thiệp Trăng Rằm', 300, 135);
 
-            // Recipient
             cx.fillStyle = '#fef08a';
             cx.font = 'bold 20px "Be Vietnam Pro"';
             cx.fillText(`Thân gửi: ${recipientSelect.value} ✨`, 300, 210);
 
-            // Message wrapping
             cx.fillStyle = '#ffffff';
             cx.font = 'italic 22px "Playfair Display", serif';
             const lines = wrapText(cx, `"${wishMessageInput.value}"`, 460);
@@ -1148,7 +926,6 @@
                 startY += 38;
             });
 
-            // Sender
             cx.textAlign = 'right';
             cx.fillStyle = '#fde047';
             cx.font = '16px "Be Vietnam Pro"';
@@ -1157,13 +934,12 @@
             cx.font = 'bold 32px "Pattaya"';
             cx.fillText(senderInput.value || 'Thái', 520, 670);
 
-            // Download Trigger
             const link = document.createElement('a');
             link.download = `Thiep_Trung_Thu_${recipientSelect.value}.png`;
             link.href = c.toDataURL('image/png');
             link.click();
 
-            showNotification("Đã tải ảnh thiệp PNG về máy! Bạn có thể gửi ngay vào nhóm!");
+            showNotification("Đã tải ảnh thiệp PNG về máy!");
         }
 
         function wrapText(context, text, maxWidth) {
@@ -1186,7 +962,7 @@
         }
 
         /* =========================================================================
-           4. FORTUNE TELLER & MINI GAME LOGIC
+           4. BỐC QUẺ & MINI GAME
            ========================================================================= */
         const fortuneList = [
             "Quẻ Đại Cát: Bạn được nhận đặc quyền ăn 10 cái bánh nướng mà vòng eo vẫn đẹp 10/10!",
@@ -1194,7 +970,7 @@
             "Quẻ Học Đỉnh: Thi cử thuận lợi, điểm số cao chót vót như đỉnh ngọn dừa!",
             "Quẻ Bất Bại: Đánh game gánh team cực mượt, chiến thắng xuyên màn đêm!",
             "Quẻ Bội Thu: Tiền tài rủng rỉnh, đi đâu cũng được người yêu quý nương nuông!",
-            "Quẻ Tình Bạn: Nhóm 6 đứa mình mãi gắn kết bền chặt như nhân bánh nướng thập cẩm!"
+            "Quẻ Tình Bạn: Nhóm F6 mãi gắn kết bền chặt như nhân bánh nướng thập cẩm!"
         ];
 
         let currentFortune = "";
@@ -1237,23 +1013,17 @@
             showNotification("Đã chuyển quẻ lời chúc vào thiệp!");
         }
 
-        /* Mini Game Engine */
+        /* Game Engine */
         const gameCanvas = document.getElementById('gameCanvas');
         const gCtx = gameCanvas.getContext('2d');
 
         let gameRunning = false;
         let score = 0;
         let lives = 3;
-        let highScore = localStorage.getItem('group_mooncake_highscore') || 0;
+        let highScore = localStorage.getItem('f6_mooncake_highscore') || 0;
         document.getElementById('gameHighScore').innerText = highScore;
 
-        let basket = {
-            x: 0,
-            y: 0,
-            width: 80,
-            height: 30
-        };
-
+        let basket = { x: 0, y: 0, width: 80, height: 30 };
         let items = [];
         let gameLoopId = null;
 
@@ -1303,7 +1073,6 @@
 
             gCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
 
-            // Basket
             gCtx.fillStyle = '#fbbf24';
             gCtx.beginPath();
             gCtx.roundRect(basket.x, basket.y, basket.width, basket.height, 10);
@@ -1324,7 +1093,6 @@
                 else if (item.type === 'gold_star') gCtx.fillText('⭐', item.x, item.y);
                 else if (item.type === 'bomb') gCtx.fillText('💣', item.x, item.y);
 
-                // Collision
                 if (
                     item.y >= basket.y - 15 &&
                     item.y <= basket.y + basket.height &&
@@ -1354,17 +1122,16 @@
             gameRunning = false;
             if (score > highScore) {
                 highScore = score;
-                localStorage.setItem('group_mooncake_highscore', highScore);
+                localStorage.setItem('f6_mooncake_highscore', highScore);
                 document.getElementById('gameHighScore').innerText = highScore;
             }
 
             document.getElementById('gameOverlayTitle').innerText = "Kết Thúc Màn Chơi!";
-            document.getElementById('gameOverlayDesc').innerText = `Bạn đạt được ${score} điểm! Kỷ lục nhóm hiện tại: ${highScore} điểm.`;
+            document.getElementById('gameOverlayDesc').innerText = `Bạn đạt được ${score} điểm! Kỷ lục nhóm F6: ${highScore} điểm.`;
             document.getElementById('startGameBtn').innerHTML = `<i class="fa-solid fa-rotate-right mr-2"></i> Chơi Lại`;
             document.getElementById('gameOverlay').classList.remove('hidden');
         }
 
-        // Game Controls
         window.addEventListener('mousemove', (e) => {
             if (!gameRunning) return;
             const rect = gameCanvas.getBoundingClientRect();
@@ -1385,7 +1152,6 @@
             basket.x = Math.min(gameCanvas.width - basket.width, basket.x + 40);
         });
 
-        /* Tab Navigation Switcher */
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(el => {
@@ -1397,12 +1163,9 @@
             const activeBtn = document.getElementById(`tab-${tabName}`);
             activeBtn.classList.add('active', 'bg-amber-500/20', 'text-amber-300', 'border', 'border-amber-500/40', 'shadow-inner');
 
-            if (tabName === 'game') {
-                setTimeout(resizeGameCanvas, 100);
-            }
+            if (tabName === 'game') setTimeout(resizeGameCanvas, 100);
         }
 
-        /* Helper Functions */
         function showNotification(msg) {
             const toast = document.createElement('div');
             toast.className = 'fixed bottom-6 right-6 z-50 glass-panel px-5 py-3 rounded-2xl text-amber-300 text-xs sm:text-sm font-semibold shadow-2xl border border-amber-400/50 flex items-center gap-2 animate-bounce';
