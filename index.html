@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đêm Hội Trăng Rằm - Hội 6 Anh Em Siêu Quậy</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Pattaya, Playfair Display, Be Vietnam Pro -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Pattaya&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-gold: #fbbf24;
+            --color-gold-glow: #fde047;
+            --color-red-lantern: #dc2626;
+            --bg-night: #050814;
+        }
+
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: var(--bg-night);
+            color: #f3f4f6;
+            overflow-x: hidden;
+            touch-action: manipulation;
+        }
+
+        .font-pattaya {
+            font-family: 'Pattaya', sans-serif;
+        }
+
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Glowing Text Effects */
+        .text-glow-gold {
+            text-shadow: 0 0 12px rgba(251, 191, 36, 0.7), 0 0 25px rgba(245, 158, 11, 0.5);
+        }
+
+        .box-glow-gold {
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.2), inset 0 0 15px rgba(251, 191, 36, 0.15);
+        }
+
+        .glass-panel {
+            background: rgba(13, 18, 38, 0.85);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080c1d;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d97706;
+            border-radius: 4px;
+        }
+
+        /* Spinning Vinyl Disc Animation */
+        @keyframes spinSlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .animate-spin-slow {
+            animation: spinSlow 6s linear infinite;
+        }
+
+        /* Keyframe Animations */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+
+        @keyframes pulseMoon {
+            0%, 100% { box-shadow: 0 0 50px rgba(254, 240, 138, 0.85), 0 0 100px rgba(253, 224, 71, 0.45); }
+            50% { box-shadow: 0 0 80px rgba(254, 240, 138, 0.95), 0 0 140px rgba(250, 204, 21, 0.65); }
+        }
+
+        @keyframes shakeStick {
+            0% { transform: rotate(0deg); }
+            20% { transform: rotate(-15deg); }
+            40% { transform: rotate(15deg); }
+            60% { transform: rotate(-10deg); }
+            80% { transform: rotate(10deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        .animate-float {
+            animation: floatSlow 5s ease-in-out infinite;
+        }
+
+        .shaking {
+            animation: shakeStick 0.6s ease-in-out infinite;
+        }
+
+        /* Sky Canvas Background */
+        #skyCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="min-h-screen relative flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950">
+
+    <!-- Interactive Sky Canvas for Stars, Moon, Member Lanterns & Fireworks -->
+    <canvas id="skyCanvas"></canvas>
+
+    <!-- Header Navigation -->
+    <header class="relative z-10 w-full px-4 py-4 md:px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-amber-500 via-amber-400 to-yellow-300 flex items-center justify-center shadow-lg shadow-amber-500/30 text-slate-950 font-bold text-2xl animate-float">
+                🥮
+            </div>
+            <div>
+                <h1 class="font-pattaya text-2xl sm:text-3xl text-amber-300 tracking-wide text-glow-gold">Hội 6 Anh Em</h1>
+                <p class="text-xs text-amber-200/80">Thanh Tâm • Quỳnh Như • Quang Hiếu • Huy Vũ • Quỳnh Nga • Thái</p>
+            </div>
+        </div>
+
+        <!-- Enhanced "Chiếc Đèn Ông Sao" Audio Player Card -->
+        <div class="glass-panel px-4 py-2.5 rounded-2xl flex items-center gap-3 shadow-xl border-amber-500/40 w-full md:w-auto justify-between md:justify-start">
+            <div class="flex items-center gap-3">
+                <!-- Spinning Vinyl Record Badge -->
+                <div id="vinylRecord" class="w-10 h-10 rounded-full bg-slate-950 border-2 border-amber-400 flex items-center justify-center relative shadow-inner">
+                    <div class="w-3 h-3 rounded-full bg-amber-400 flex items-center justify-center">
+                        <div class="w-1 h-1 rounded-full bg-slate-950"></div>
+                    </div>
+                    <span class="absolute -top-1 -right-1 text-[10px]">⭐</span>
+                </div>
+                <div>
+                    <h2 class="text-xs font-bold text-amber-300 flex items-center gap-1">
+                        Chiếc Đèn Ông Sao <span class="text-[10px] px-1.5 py-0.2 rounded bg-red-600/80 text-white font-normal">Nhạc Nhóm</span>
+                    </h2>
+                    <p class="text-[10px] text-gray-300">Đàn Tranh & Trống Hội Trung Thu</p>
+                </div>
+            </div>
+
+            <!-- Player Controls -->
+            <div class="flex items-center gap-3">
+                <button id="musicToggleBtn" class="w-9 h-9 rounded-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:scale-105 active:scale-95 text-slate-950 font-bold flex items-center justify-center shadow-md transition-all">
+                    <i id="musicIcon" class="fa-solid fa-play ml-0.5 text-sm"></i>
+                </button>
+                <!-- Volume Control Slider -->
+                <div class="hidden sm:flex items-center gap-1 text-amber-300/80 text-xs">
+                    <i class="fa-solid fa-volume-low text-xs"></i>
+                    <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.5" class="w-16 accent-amber-400 cursor-pointer h-1.5 bg-slate-800 rounded-lg">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 flex-grow max-w-7xl mx-auto w-full px-4 py-4 md:py-6 flex flex-col items-center">
+        
+        <!-- Group Hero Title Banner -->
+        <section class="text-center my-3 md:my-5 max-w-3xl relative">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs sm:text-sm font-medium mb-3 backdrop-blur-md">
+                <span>🌕</span> Lễ Hội Đêm Trăng Rằm • Gửi 6 Anh Em <span>✨</span>
+            </div>
+            <h2 class="font-pattaya text-4xl sm:text-6xl md:text-7xl text-amber-300 text-glow-gold leading-tight mb-3">
+                Trung Thu Xum Vầy <br class="hidden sm:inline" /><span class="text-red-400 font-playfair italic">Chiếc Đèn Ông Sao!</span>
+            </h2>
+            <p class="text-gray-300 text-xs sm:text-sm md:text-base leading-relaxed max-w-2xl mx-auto px-2">
+                Bật nhạc nền <strong class="text-amber-300">"Chiếc Đèn Ông Sao"</strong>, nhấp vào chiếc đèn lồng trên bầu trời đêm mang tên <strong class="text-amber-300">Thanh Tâm, Quỳnh Như, Quang Hiếu, Huy Vũ, Quỳnh Nga, Thái</strong> để mở thông điệp bí mật!
+            </p>
+
+            <!-- Quick Member Avatar Lantern Badges -->
+            <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mt-5">
+                <button onclick="triggerMemberLantern('Thanh Tâm')" class="px-3 py-1.5 rounded-xl glass-panel text-xs text-amber-300 hover:bg-amber-500/20 hover:border-amber-400 transition-all flex items-center gap-1.5 shadow-md">
+                    🏮 <b>Thanh Tâm</b>
+                </button>
+                <button onclick="triggerMemberLantern('Quỳnh Như')" class="px-3 py-1.5 rounded-xl glass-panel text-xs text-amber-300 hover:bg-amber-500/20 hover:border-amber-400 transition-all flex items-center gap-1.5 shadow-md">
+                    🏮 <b>Quỳnh Như</b>
+                </button>
+                <button onclick="triggerMemberLantern('Quang Hiếu')" class="px-3 py-1.5 rounded-xl glass-panel text-xs text-amber-300 hover:bg-amber-500/20 hover:border-amber-400 transition-all flex items-center gap-1.5 shadow-md">
+                    🏮 <b>Quang Hiếu</b>
+                </button>
+                <button onclick="triggerMemberLantern('Huy Vũ')" class="px-3 py-1.5 rounded-xl glass-panel text-xs text-amber-300 hover:bg-amber-500/20 hover:border-amber-400 transition-all flex items-center gap-1.5 shadow-md">
+                    🏮 <b>Huy Vũ</b>
+                </button>
+                <button onclick="triggerMemberLantern('Quỳnh Nga')" class="px-3 py-1.5 rounded-xl glass-panel text-xs text-amber-300 hover:bg-amber-500/20 hover:border-amber-400 transition-all flex items-center gap-1.5 shadow-md">
+                    🏮 <b>Quỳnh Nga</b>
+                </button>
+                <button onclick="triggerMemberLantern('Doãn Thái')" class="px-3 py-1.5 rounded-xl glass-panel text-xs text-amber-300 hover:bg-amber-500/20 hover:border-amber-400 transition-all flex items-center gap-1.5 shadow-md">
+                    🏮 <b>Doãn Thái</b>
+                </button>
+            </div>
+        </section>
+
+        <!-- Interactive Navigation Tabs -->
+        <div class="w-full max-w-4xl glass-panel rounded-2xl p-2 mb-8 shadow-2xl flex flex-wrap justify-center gap-2 border-amber-500/30">
+            <button onclick="switchTab('lantern')" id="tab-lantern" class="tab-btn active flex-1 min-w-[130px] py-2.5 px-3 rounded-xl font-medium text-xs sm:text-sm transition-all flex items-center justify-center gap-2 bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-inner">
+                <i class="fa-solid fa-lightbulb text-amber-400"></i> Đèn Lồng 6 Anh Em
+            </button>
+            <button onclick="switchTab('card')" id="tab-card" class="tab-btn flex-1 min-w-[130px] py-2.5 px-3 rounded-xl font-medium text-xs sm:text-sm transition-all flex items-center justify-center gap-2 text-gray-300 hover:text-amber-200 hover:bg-slate-800/50">
+                <i class="fa-solid fa-envelope-open-text text-amber-400"></i> Tạo Thiệp Tặng Bạn
+            </button>
+            <button onclick="switchTab('fortune')" id="tab-fortune" class="tab-btn flex-1 min-w-[130px] py-2.5 px-3 rounded-xl font-medium text-xs sm:text-sm transition-all flex items-center justify-center gap-2 text-gray-300 hover:text-amber-200 hover:bg-slate-800/50">
+                <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i> Quẻ May Mắn
+            </button>
+            <button onclick="switchTab('game')" id="tab-game" class="tab-btn flex-1 min-w-[130px] py-2.5 px-3 rounded-xl font-medium text-xs sm:text-sm transition-all flex items-center justify-center gap-2 text-gray-300 hover:text-amber-200 hover:bg-slate-800/50">
+                <i class="fa-solid fa-gamepad text-amber-400"></i> Mini Game Hứng Bánh
+            </button>
+        </div>
+
+        <!-- TAB CONTENT 1: ĐÈN LỒNG 6 THÀNH VIÊN -->
+        <section id="content-lantern" class="tab-content w-full max-w-4xl">
+            <div class="glass-panel rounded-3xl p-6 md:p-8 text-center relative overflow-hidden box-glow-gold">
+                <h3 class="font-pattaya text-3xl text-amber-300 mb-2">🏮 Đèn Lồng Đêm Rằm 6 Anh Em 🏮</h3>
+                <p class="text-xs sm:text-sm text-gray-300 max-w-xl mx-auto mb-6">
+                    Bầu trời đêm rằm tỏa sáng 6 chiếc Đèn Lồng mang tên từng người. Hãy chạm vào đèn lồng tương ứng để ngắm pháo hoa bắn lên và nhận lời chúc riêng!
+                </p>
+
+                <!-- Cards list for quick access to the 6 members -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4 my-6">
+                    <div onclick="triggerMemberLantern('Thanh Tâm')" class="p-4 rounded-2xl bg-slate-900/80 border border-amber-500/30 hover:border-amber-400 cursor-pointer transition-all hover:scale-105 text-left group">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xl">🏮</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300">Nhấp Mở</span>
+                        </div>
+                        <h4 class="font-pattaya text-lg text-amber-300 group-hover:text-yellow-200">Thanh Tâm</h4>
+                        <p class="text-[11px] text-gray-400 line-clamp-1">Lời chúc xinh đẹp & học giỏi...</p>
+                    </div>
+
+                    <div onclick="triggerMemberLantern('Quỳnh Như')" class="p-4 rounded-2xl bg-slate-900/80 border border-amber-500/30 hover:border-amber-400 cursor-pointer transition-all hover:scale-105 text-left group">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xl">🏮</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300">Nhấp Mở</span>
+                        </div>
+                        <h4 class="font-pattaya text-lg text-amber-300 group-hover:text-yellow-200">Quỳnh Như</h4>
+                        <p class="text-[11px] text-gray-400 line-clamp-1">Năng lượng rạng rỡ Hằng Nga...</p>
+                    </div>
+
+                    <div onclick="triggerMemberLantern('Quang Hiếu')" class="p-4 rounded-2xl bg-slate-900/80 border border-amber-500/30 hover:border-amber-400 cursor-pointer transition-all hover:scale-105 text-left group">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xl">🏮</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300">Nhấp Mở</span>
+                        </div>
+                        <h4 class="font-pattaya text-lg text-amber-300 group-hover:text-yellow-200">Quang Hiếu</h4>
+                        <p class="text-[11px] text-gray-400 line-clamp-1">Gánh team game siêu mượt...</p>
+                    </div>
+
+                    <div onclick="triggerMemberLantern('Huy Vũ')" class="p-4 rounded-2xl bg-slate-900/80 border border-amber-500/30 hover:border-amber-400 cursor-pointer transition-all hover:scale-105 text-left group">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xl">🏮</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300">Nhấp Mở</span>
+                        </div>
+                        <h4 class="font-pattaya text-lg text-amber-300 group-hover:text-yellow-200">Huy Vũ</h4>
+                        <p class="text-[11px] text-gray-400 line-clamp-1">Đẹp trai phong độ 10/10...</p>
+                    </div>
+
+                    <div onclick="triggerMemberLantern('Quỳnh Nga')" class="p-4 rounded-2xl bg-slate-900/80 border border-amber-500/30 hover:border-amber-400 cursor-pointer transition-all hover:scale-105 text-left group">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xl">🏮</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300">Nhấp Mở</span>
+                        </div>
+                        <h4 class="font-pattaya text-lg text-amber-300 group-hover:text-yellow-200">Quỳnh Nga</h4>
+                        <p class="text-[11px] text-gray-400 line-clamp-1">Dịu dàng & thi cử điểm tối đa...</p>
+                    </div>
+
+                    <div onclick="triggerMemberLantern('Doãn Thái')" class="p-4 rounded-2xl bg-slate-900/80 border border-amber-500/30 hover:border-amber-400 cursor-pointer transition-all hover:scale-105 text-left group">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xl">🏮</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300">Nhấp Mở</span>
+                        </div>
+                        <h4 class="font-pattaya text-lg text-amber-300 group-hover:text-yellow-200">Thái (Tớ)</h4>
+                        <p class="text-[11px] text-gray-400 line-clamp-1">Lời cảm ơn tình bạn 6 đứa...</p>
+                    </div>
+                </div>
+
+                <!-- Input area to release extra personalized group lanterns -->
+                <div class="mt-8 pt-6 border-t border-amber-500/20 text-left max-w-xl mx-auto">
+                    <h4 class="text-sm font-semibold text-amber-300 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-paper-plane text-amber-400"></i> Thả Thêm Đèn Ước Nguyện Của Bạn:
+                    </h4>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <select id="extraNameInput" class="px-3 py-2.5 rounded-xl bg-slate-900/90 border border-amber-500/30 text-amber-200 text-xs focus:outline-none focus:border-amber-400">
+                            <option value="Thanh Tâm">Thanh Tâm</option>
+                            <option value="Quỳnh Như">Quỳnh Như</option>
+                            <option value="Quang Hiếu">Quang Hiếu</option>
+                            <option value="Huy Vũ">Huy Vũ</option>
+                            <option value="Quỳnh Nga">Quỳnh Nga</option>
+                            <option value="Thái">Thái (Người Gửi)</option>
+                        </select>
+                        <input type="text" id="extraWishInput" placeholder="Nhập tâm nguyện ước mơ của bạn..." class="flex-grow px-4 py-2.5 rounded-xl bg-slate-900/90 border border-amber-500/30 text-amber-100 text-xs focus:outline-none focus:border-amber-400">
+                        <button onclick="releaseExtraLantern()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-red-600 to-amber-500 hover:from-red-500 hover:to-amber-400 text-white font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-1.5 whitespace-nowrap">
+                            <i class="fa-solid fa-fire"></i> Thả Đèn
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB CONTENT 2: BỘ TẠO THIỆP TẶNG BẠN BÈ TRONG NHÓM -->
+        <section id="content-card" class="tab-content hidden w-full max-w-5xl">
+            <div id="wishCardSection" class="glass-panel rounded-3xl p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Customizer Controls -->
+                <div class="lg:col-span-5 space-y-4">
+                    <h3 class="font-pattaya text-2xl text-amber-300 flex items-center gap-2">
+                        <i class="fa-solid fa-pen-nib text-amber-400 text-xl"></i> Tạo Thiệp Cho Anh Em
+                    </h3>
+                    <p class="text-xs text-gray-300">Chọn tên người nhận trong nhóm 6 đứa mình để tự động điền lời chúc siêu hay!</p>
+
+                    <div>
+                        <label class="block text-xs font-medium text-amber-200/80 mb-1">Người Gửi (Bạn):</label>
+                        <input type="text" id="senderInput" value="Thái" placeholder="Nhập tên người gửi..." class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-amber-500/30 text-amber-100 text-sm focus:outline-none focus:border-amber-400">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-amber-200/80 mb-1">Chọn Người Nhận Trong Nhóm:</label>
+                        <select id="recipientSelect" onchange="applyRecipientPreset()" class="w-full px-3 py-2.5 rounded-xl bg-slate-900/80 border border-amber-500/30 text-amber-300 font-semibold text-xs focus:outline-none focus:border-amber-400">
+                            <option value="Thanh Tâm">Thanh Tâm 🌸</option>
+                            <option value="Quỳnh Như">Quỳnh Như ✨</option>
+                            <option value="Quang Hiếu">Quang Hiếu 🎮</option>
+                            <option value="Huy Vũ">Huy Vũ 🔥</option>
+                            <option value="Quỳnh Nga">Quỳnh Nga 🌺</option>
+                            <option value="Cả Hội 6 Anh Em">Cả Hội 6 Anh Em 🌕</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-amber-200/80 mb-1">Mẫu Câu Chúc Chọn Nhanh:</label>
+                        <select id="presetWishes" onchange="selectPresetWish()" class="w-full px-3 py-2.5 rounded-xl bg-slate-900/80 border border-amber-500/30 text-amber-200 text-xs focus:outline-none focus:border-amber-400">
+                            <option value="">-- Chọn câu chúc có sẵn --</option>
+                            <option value="Chúc bạn Trung thu xinh đẹp, rạng rỡ như ánh trăng rằm, ăn bánh nướng thả ga mà dáng vẫn chuẩn 10/10!">Xinh đẹp & Ăn bánh không tăng cân</option>
+                            <option value="Chúc bạn Trung thu phong độ ngút ngàn, gánh team cực mượt, tiền vào như nước, sớm có người yêu!">Phong độ & Gánh team cực mượt</option>
+                            <option value="Gửi cả nhóm 6 đứa mình: Chúc tình bạn của chúng ta mãi bền chặt như nhân bánh nướng thập cẩm, Trung thu nào cũng quây quần bên nhau!">Tình bạn 6 người mãi bền chặt</option>
+                            <option value="Chúc bạn thu sang an lành, thi cử may mắn điểm cao chót vót, vạn sự như ý!">An lành & Thi cử đạt điểm tối đa</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-amber-200/80 mb-1">Nội Dung Lời Chúc Mừng:</label>
+                        <textarea id="wishMessageInput" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-amber-500/30 text-amber-100 text-sm focus:outline-none focus:border-amber-400 leading-relaxed" placeholder="Viết lời chúc riêng cho bạn bè tại đây..."></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-amber-200/80 mb-1">Phong Cách Màu Thiệp:</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button onclick="setCardTheme('theme-gold')" class="py-2 rounded-xl border border-amber-400/50 bg-gradient-to-r from-amber-950 to-slate-900 text-amber-300 text-xs font-medium hover:border-amber-300">
+                                Hoàng Kim
+                            </button>
+                            <button onclick="setCardTheme('theme-red')" class="py-2 rounded-xl border border-red-500/50 bg-gradient-to-r from-red-950 to-slate-900 text-red-300 text-xs font-medium hover:border-red-400">
+                                Đỏ Đèn Lồng
+                            </button>
+                            <button onclick="setCardTheme('theme-night')" class="py-2 rounded-xl border border-blue-500/50 bg-gradient-to-r from-slate-950 to-indigo-950 text-indigo-300 text-xs font-medium hover:border-indigo-400">
+                                Đêm Huyền Diệu
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Card Preview & Action Buttons -->
+                <div class="lg:col-span-7 flex flex-col items-center">
+                    <!-- Visual Card Preview Display -->
+                    <div id="cardPreview" class="theme-gold w-full max-w-md aspect-[4/5] rounded-2xl p-6 sm:p-8 relative flex flex-col justify-between shadow-2xl border-2 border-amber-400/60 overflow-hidden bg-gradient-to-b from-slate-950 via-amber-950/40 to-slate-950 transition-all">
+                        <div class="absolute inset-2 border border-amber-500/30 rounded-xl pointer-events-none"></div>
+                        <div class="absolute top-4 left-4 text-amber-400/60 text-xl">🏮</div>
+                        <div class="absolute top-4 right-4 text-amber-400/60 text-xl">🌕</div>
+                        <div class="absolute bottom-4 left-4 text-amber-400/60 text-xl">🥮</div>
+                        <div class="absolute bottom-4 right-4 text-amber-400/60 text-xl">🐇</div>
+
+                        <!-- Card Header -->
+                        <div class="text-center pt-2 relative z-10">
+                            <span class="text-[10px] sm:text-xs tracking-widest text-amber-400/80 uppercase font-semibold">Tết Trung Thu • Hội 6 Anh Em</span>
+                            <h4 class="font-pattaya text-3xl sm:text-4xl text-amber-300 text-glow-gold mt-1">Thiệp Trăng Rằm</h4>
+                            <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mt-2"></div>
+                        </div>
+
+                        <!-- Card Body (Message) -->
+                        <div class="my-auto py-4 text-center relative z-10">
+                            <p class="text-xs text-amber-200/70 mb-2 font-medium">Thân gửi người bạn thân: <span id="cardRecipientDisplay" class="text-amber-300 font-bold text-sm">Thanh Tâm</span> ✨</p>
+                            <p id="cardMessageDisplay" class="font-playfair text-base sm:text-lg italic text-yellow-100 leading-relaxed px-2 my-2">
+                                "Chúc bạn Trung thu xinh xắn rạng rỡ, học giỏi xuất sắc, ăn bánh nướng bánh dẻo thả ga mà vòng eo vẫn đẹp 10/10!"
+                            </p>
+                        </div>
+
+                        <!-- Card Footer -->
+                        <div class="text-right pb-2 pr-2 relative z-10 border-t border-amber-500/20 pt-3">
+                            <p class="text-xs text-amber-300/80">Từ người bạn trong nhóm:</p>
+                            <p id="cardSenderDisplay" class="font-pattaya text-xl text-amber-300 text-glow-gold">Thái</p>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-wrap gap-3 justify-center w-full mt-6">
+                        <button onclick="copyCardText()" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs sm:text-sm font-semibold border border-amber-500/40 transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-copy"></i> Sao Chép Lời Chúc
+                        </button>
+                        <button onclick="downloadCardImage()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 text-xs sm:text-sm font-bold shadow-lg shadow-amber-500/30 transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-download"></i> Tải Ảnh Thiệp PNG (Gửi Group)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB CONTENT 3: BỐC QUẺ MAY MẮN TRUNG THU HỘI BẠN THÂN -->
+        <section id="content-fortune" class="tab-content hidden w-full max-w-4xl">
+            <div class="glass-panel rounded-3xl p-6 md:p-10 text-center relative overflow-hidden box-glow-gold">
+                <h3 class="font-pattaya text-3xl text-amber-300 mb-2">🧧 Quẻ May Mắn 6 Anh Em 🧧</h3>
+                <p class="text-xs sm:text-sm text-gray-300 mb-6">Lắc ống quẻ Trung Thu xem thần may mắn gọi tên ai trong nhóm mình hôm nay!</p>
+
+                <div class="flex flex-col items-center justify-center my-6">
+                    <!-- Shaker Tube Graphic -->
+                    <div id="stickHolder" class="relative w-32 h-48 sm:w-40 sm:h-56 bg-gradient-to-b from-amber-800 to-amber-950 border-4 border-amber-500/60 rounded-b-3xl rounded-t-lg shadow-2xl flex items-center justify-center cursor-pointer transition-transform hover:scale-105" onclick="drawFortune()">
+                        <div class="absolute -top-10 flex gap-1 justify-center w-full px-2">
+                            <div class="w-2.5 h-16 bg-amber-200 rounded-t border border-amber-600 shadow"></div>
+                            <div class="w-2.5 h-20 bg-amber-300 rounded-t border border-amber-600 shadow -translate-y-2"></div>
+                            <div id="activeStick" class="w-3 h-24 bg-red-500 rounded-t border border-amber-300 shadow -translate-y-4 transition-transform duration-500 flex items-center justify-center text-[10px] text-yellow-200 font-bold tracking-tighter write-vertical">CÁT</div>
+                            <div class="w-2.5 h-18 bg-amber-300 rounded-t border border-amber-600 shadow"></div>
+                            <div class="w-2.5 h-14 bg-amber-200 rounded-t border border-amber-600 shadow"></div>
+                        </div>
+                        <div class="z-10 text-center px-2">
+                            <div class="w-12 h-12 mx-auto rounded-full bg-amber-500/20 border border-amber-400 flex items-center justify-center text-2xl text-amber-300 mb-1">
+                                🥮
+                            </div>
+                            <span class="text-[10px] font-bold text-amber-200 uppercase tracking-widest block">Quẻ Anh Em</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="drawFortune()" class="px-8 py-3 rounded-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-bold text-sm sm:text-base shadow-lg shadow-amber-500/30 transition-all hover:scale-105 active:scale-95 mb-4">
+                    <i class="fa-solid fa-hand-sparkles mr-2"></i> Lắc Ống Bốc Quẻ
+                </button>
+
+                <!-- Fortune Stick Result Box -->
+                <div id="fortuneResult" class="hidden mt-4 p-6 rounded-2xl bg-slate-900/90 border border-amber-400/50 text-left relative animate-fadeIn max-w-xl mx-auto">
+                    <div class="flex items-center justify-between border-b border-amber-500/30 pb-3 mb-3">
+                        <span id="fortuneTitle" class="font-pattaya text-xl text-amber-300">✨ Quẻ Đại Cát #01</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40">Hội 6 Anh Em</span>
+                    </div>
+                    <p id="fortuneText" class="text-base sm:text-lg text-yellow-100 italic leading-relaxed my-4 text-center font-playfair">
+                        "Quẻ Đại Cát: Bạn được nhận đặc quyền ăn 10 cái bánh nướng thập cẩm mà không tốn 1 gram mỡ thừa nào!"
+                    </p>
+                    <div class="flex flex-wrap gap-3 justify-end pt-2">
+                        <button onclick="copyFortune()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs font-medium border border-amber-500/30 transition-all">
+                            <i class="fa-solid fa-copy mr-1.5"></i> Sao Chép
+                        </button>
+                        <button onclick="useFortuneInCard()" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold transition-all">
+                            <i class="fa-solid fa-envelope mr-1.5"></i> Chuyển Vào Thiệp
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB CONTENT 4: MINI GAME THỎ NGỌC HỨNG BÁNH TRUNG THU -->
+        <section id="content-game" class="tab-content hidden w-full max-w-4xl">
+            <div class="glass-panel rounded-3xl p-4 sm:p-6 text-center relative overflow-hidden box-glow-gold">
+                <div class="flex items-center justify-between flex-wrap gap-2 mb-4 px-2">
+                    <div>
+                        <h3 class="font-pattaya text-2xl sm:text-3xl text-amber-300 text-left">🥮 Thỏ Ngọc Hứng Bánh</h3>
+                        <p class="text-xs text-gray-300 text-left">Hứng thật nhiều bánh nướng & sao may mắn để ghi điểm kỷ lục nhóm!</p>
+                    </div>
+                    <div class="flex items-center gap-4 text-xs sm:text-sm font-bold bg-slate-900/80 px-4 py-2 rounded-xl border border-amber-500/30">
+                        <div>Điểm: <span id="gameScore" class="text-amber-300 text-lg">0</span></div>
+                        <div>Mạng: <span id="gameLives" class="text-red-400 text-lg">❤️❤️❤️</span></div>
+                        <div>Kỷ Lục: <span id="gameHighScore" class="text-yellow-400">0</span></div>
+                    </div>
+                </div>
+
+                <!-- Game Canvas Container -->
+                <div class="relative w-full aspect-[4/3] max-h-[420px] bg-slate-950 rounded-2xl border-2 border-amber-500/40 overflow-hidden shadow-2xl mx-auto touch-none">
+                    <canvas id="gameCanvas" class="w-full h-full block cursor-pointer"></canvas>
+                    
+                    <!-- Game Start Overlay -->
+                    <div id="gameOverlay" class="absolute inset-0 bg-slate-950/90 backdrop-blur-sm flex flex-col items-center justify-center p-6 z-20">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 border border-amber-400 flex items-center justify-center text-3xl mb-3">
+                            🐇
+                        </div>
+                        <h4 id="gameOverlayTitle" class="font-pattaya text-3xl text-amber-300 mb-2">Thỏ Ngọc Hứng Bánh</h4>
+                        <p id="gameOverlayDesc" class="text-xs sm:text-sm text-gray-300 mb-6 max-w-xs">Di chuyển chuột, chạm vuốt màn hình hoặc nút bấm ◄ ► để giỏ Thỏ Ngọc hứng nhiều bánh nhất!</p>
+                        <button id="startGameBtn" onclick="initAndStartGame()" class="px-8 py-3 rounded-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-bold text-base shadow-lg shadow-amber-500/30 transition-all hover:scale-105">
+                            <i class="fa-solid fa-play mr-2"></i> Bắt Đầu Chơi
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile controls -->
+                <div class="mt-4 flex justify-center gap-6 sm:hidden">
+                    <button id="btnLeft" class="w-16 h-12 bg-slate-800 border border-amber-500/40 rounded-xl text-amber-300 text-xl active:bg-amber-500 active:text-slate-950">◄</button>
+                    <button id="btnRight" class="w-16 h-12 bg-slate-800 border border-amber-500/40 rounded-xl text-amber-300 text-xl active:bg-amber-500 active:text-slate-950">►</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Member Dedicated Wish Modal -->
+    <div id="memberModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 hidden animate-fadeIn">
+        <div class="glass-panel max-w-md w-full rounded-3xl p-6 sm:p-8 relative border-2 border-amber-400/80 text-center box-glow-gold">
+            <button onclick="closeMemberModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800 border border-amber-500/40 text-amber-300 hover:text-white flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-tr from-amber-500 to-red-500 flex items-center justify-center text-4xl shadow-xl shadow-amber-500/30 mb-4 animate-bounce">
+                🏮
+            </div>
+
+            <span class="text-xs text-amber-400/80 uppercase font-semibold tracking-widest block">Đèn Lồng Lời Chúc Riêng</span>
+            <h3 id="modalMemberName" class="font-pattaya text-3xl sm:text-4xl text-amber-300 text-glow-gold my-2">Thanh Tâm</h3>
+
+            <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto my-3"></div>
+
+            <p id="modalMemberWish" class="font-playfair text-base sm:text-lg italic text-yellow-100 leading-relaxed my-4">
+                "Chúc Thanh Tâm Trung Thu xinh xắn rạng rỡ, học giỏi xuất sắc, ăn bánh nướng bánh dẻo thả ga mà vòng eo vẫn đẹp 10/10!"
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-2 mt-6">
+                <button onclick="copyModalWish()" class="flex-1 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs font-semibold border border-amber-500/30">
+                    <i class="fa-solid fa-copy mr-1"></i> Sao Chép
+                </button>
+                <button onclick="sendModalWishToCard()" class="flex-1 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold shadow-md">
+                    <i class="fa-solid fa-paper-plane mr-1"></i> Tạo Thiệp Tặng
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="relative z-10 w-full text-center py-5 border-t border-amber-500/10 text-xs text-amber-200/50">
+        <p>Gửi Trọn Yêu Thương Tới Hội 6 Anh Em: Thanh Tâm • Quỳnh Như • Quang Hiếu • Huy Vũ • Quỳnh Nga • Thái 🌕✨</p>
+    </footer>
+
+    <script>
+        /* =========================================================================
+           1. "CHIẾC ĐÈN ÔNG SAO" WEB AUDIO SYNTHESIZER (WebAudio API Engine)
+           Synthesizes exact melody + festive percussion (Tùng Rinh Rinh)
+           ========================================================================= */
+        class ChiecDenOngSaoSynth {
+            constructor() {
+                this.ctx = null;
+                this.isPlaying = false;
+                this.noteTimer = null;
+                this.currentStep = 0;
+                this.masterGain = null;
+                this.volume = 0.5;
+
+                // Frequencies (C Major Scale mapping)
+                this.notesFreq = {
+                    'C4': 261.63, 'D4': 293.66, 'E4': 329.63, 'F4': 349.23, 'G4': 392.00, 'A4': 440.00,
+                    'C5': 523.25, 'D5': 587.33, 'E5': 659.25, 'G5': 783.99, 'A5': 880.00, 'C6': 1046.50
+                };
+
+                // "Chiếc Đèn Ông Sao" Full Note Sequence [noteName, beatDuration, isDrumBeat]
+                this.score = [
+                    // --- Câu 1: Chiếc đèn ông sao sao 5 cánh tươi màu ---
+                    ['G4', 0.5, false], ['G4', 0.5, false], ['C5', 0.5, false], ['C5', 0.5, false],
+                    ['C5', 0.5, false], ['D5', 0.5, false], ['E5', 1.0, false], ['C5', 0.5, false], ['G4', 0.5, false],
+                    ['C5', 0.5, false], ['C5', 0.5, false], ['A4', 0.5, false], ['G4', 0.5, false],
+                    ['A4', 0.5, false], ['G4', 0.5, false], ['E4', 0.5, false], ['G4', 1.0, false],
+
+                    // --- Câu 2: Cán đây rất dài cán cao qua đầu ---
+                    ['G4', 0.5, false], ['G4', 0.5, false], ['C5', 0.5, false], ['C5', 0.5, false],
+                    ['C5', 0.5, false], ['D5', 0.5, false], ['E5', 1.0, false], ['C5', 0.5, false], ['G4', 0.5, false],
+                    ['C5', 0.5, false], ['C5', 0.5, false], ['A4', 0.5, false], ['G4', 0.5, false],
+                    ['A4', 0.5, false], ['G4', 0.5, false], ['E4', 0.5, false], ['C4', 1.0, false],
+
+                    // --- Câu 3: Em cầm đèn sao em hát ca vui ---
+                    ['E4', 0.5, false], ['G4', 0.5, false], ['E4', 0.5, false], ['G4', 0.5, false],
+                    ['C5', 0.75, false], ['C5', 0.25, false], ['A4', 0.5, false], ['G4', 1.0, false],
+
+                    // --- Câu 4: Đèn đèn ông sao với ánh Bác Hồ ---
+                    ['E4', 0.5, false], ['G4', 0.5, false], ['E4', 0.5, false], ['G4', 0.5, false],
+                    ['C5', 0.5, false], ['D5', 0.5, false], ['C5', 1.5, false],
+
+                    // --- Điệp Khúc: Tùng rinh rinh, tùng tùng tùng rinh rinh ---
+                    ['TUNG', 0.5, true], ['RINH', 0.25, true], ['RINH', 0.25, true],
+                    ['TUNG', 0.5, true], ['TUNG', 0.5, true], ['TUNG', 0.5, true], ['RINH', 0.25, true], ['RINH', 0.25, true],
+                    ['G5', 0.5, false], ['E5', 0.5, false], ['C5', 0.5, false], ['D5', 0.5, false], ['C5', 1.0, false],
+
+                    // --- Đây ánh sao vui chiếu xa sáng ngời ---
+                    ['E4', 0.5, false], ['G4', 0.5, false], ['C5', 0.5, false], ['D5', 0.5, false],
+                    ['E5', 0.5, false], ['G5', 0.5, false], ['E5', 0.5, false], ['D5', 0.5, false], ['C5', 1.5, false],
+
+                    // --- Đoạn trống hội kết thúc phiên khúc ---
+                    ['TUNG', 0.5, true], ['RINH', 0.25, true], ['RINH', 0.25, true], ['TUNG', 1.0, true]
+                ];
+            }
+
+            initCtx() {
+                if (!this.ctx) {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    this.ctx = new AudioContext();
+                    this.masterGain = this.ctx.createGain();
+                    this.masterGain.gain.setValueAtTime(this.volume, this.ctx.currentTime);
+                    this.masterGain.connect(this.ctx.destination);
+                }
+            }
+
+            setVolume(val) {
+                this.volume = val;
+                if (this.masterGain && this.ctx) {
+                    this.masterGain.gain.setValueAtTime(this.volume, this.ctx.currentTime);
+                }
+            }
+
+            // Plucked Zither / Flute Instrument Sound
+            playMelodyNote(noteName, durationInSeconds) {
+                if (!this.ctx || !this.notesFreq[noteName]) return;
+
+                const freq = this.notesFreq[noteName];
+                const now = this.ctx.currentTime;
+
+                // Main Harmonic Oscillator
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+
+                // Bright triangle wave for oriental guzheng/flute resonance
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(freq, now);
+
+                // Sub-harmonic shimmer
+                const subOsc = this.ctx.createOscillator();
+                subOsc.type = 'sine';
+                subOsc.frequency.setValueAtTime(freq * 2, now);
+                const subGain = this.ctx.createGain();
+                subGain.gain.setValueAtTime(0.15, now);
+                subGain.gain.exponentialRampToValueAtTime(0.001, now + durationInSeconds);
+
+                subOsc.connect(subGain);
+                subGain.connect(this.masterGain);
+
+                // Attack, Decay, Sustain, Release Envelope
+                gain.gain.setValueAtTime(0, now);
+                gain.gain.linearRampToValueAtTime(0.22, now + 0.04);
+                gain.gain.exponentialRampToValueAtTime(0.0001, now + durationInSeconds * 1.3);
+
+                osc.connect(gain);
+                gain.connect(this.masterGain);
+
+                osc.start(now);
+                subOsc.start(now);
+                osc.stop(now + durationInSeconds * 1.4);
+                subOsc.stop(now + durationInSeconds * 1.4);
+            }
+
+            // Traditional Festival Drum "Tùng" & Cymbal "Rinh"
+            playDrum(type) {
+                if (!this.ctx) return;
+                const now = this.ctx.currentTime;
+
+                if (type === 'TUNG') {
+                    // Deep Bass Drum
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(140, now);
+                    osc.frequency.exponentialRampToValueAtTime(38, now + 0.35);
+
+                    gain.gain.setValueAtTime(0.6, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
+
+                    osc.connect(gain);
+                    gain.connect(this.masterGain);
+                    osc.start(now);
+                    osc.stop(now + 0.4);
+                } else if (type === 'RINH') {
+                    // High Cymbal / Ringing Chime
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(1046.5, now); // C6 Note
+                    osc.frequency.linearRampToValueAtTime(1500, now + 0.15);
+
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+
+                    osc.connect(gain);
+                    gain.connect(this.masterGain);
+                    osc.start(now);
+                    osc.stop(now + 0.2);
+                }
+            }
+
+            step() {
+                if (!this.isPlaying) return;
+
+                const item = this.score[this.currentStep];
+                const noteName = item[0];
+                const beats = item[1];
+                const isDrum = item[2];
+
+                const tempoBPM = 138; // Upbeat festive tempo
+                const beatDurationSec = (60 / tempoBPM) * beats;
+
+                if (isDrum) {
+                    this.playDrum(noteName);
+                } else {
+                    this.playMelodyNote(noteName, beatDurationSec);
+                    // Accompany soft background bass drum every 2 beats
+                    if (this.currentStep % 4 === 0) {
+                        this.playDrum('TUNG');
+                    }
+                }
+
+                this.currentStep = (this.currentStep + 1) % this.score.length;
+                this.noteTimer = setTimeout(() => this.step(), beatDurationSec * 1000);
+            }
+
+            toggle() {
+                this.initCtx();
+                if (this.ctx && this.ctx.state === 'suspended') {
+                    this.ctx.resume();
+                }
+
+                this.isPlaying = !this.isPlaying;
+
+                const musicIcon = document.getElementById('musicIcon');
+                const vinyl = document.getElementById('vinylRecord');
+
+                if (this.isPlaying) {
+                    musicIcon.className = "fa-solid fa-pause text-slate-950 text-sm";
+                    vinyl.classList.add('animate-spin-slow');
+                    this.step();
+                } else {
+                    musicIcon.className = "fa-solid fa-play ml-0.5 text-slate-950 text-sm";
+                    vinyl.classList.remove('animate-spin-slow');
+                    if (this.noteTimer) clearTimeout(this.noteTimer);
+                }
+            }
+        }
+
+        const audioSynth = new ChiecDenOngSaoSynth();
+
+        document.getElementById('musicToggleBtn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            audioSynth.toggle();
+        });
+
+        document.getElementById('volumeSlider').addEventListener('input', (e) => {
+            audioSynth.setVolume(parseFloat(e.target.value));
+        });
+
+        // Auto unlock audio on user first tap anywhere
+        window.addEventListener('click', function unlockAudioOnce() {
+            audioSynth.initCtx();
+            if (audioSynth.ctx && audioSynth.ctx.state === 'suspended') {
+                audioSynth.ctx.resume();
+            }
+            window.removeEventListener('click', unlockAudioOnce);
+        }, { once: true });
+
+
+        /* =========================================================================
+           2. SKY CANVAS BACKGROUND ENGINE (Stars, Moon, Member Floating Lanterns & Fireworks)
+           ========================================================================= */
+        const canvas = document.getElementById('skyCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            initStars();
+            positionMemberLanterns();
+        });
+
+        // Twinkling stars
+        let stars = [];
+        function initStars() {
+            stars = [];
+            const count = Math.floor((width * height) / 3800);
+            for (let i = 0; i < count; i++) {
+                stars.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 1.5 + 0.5,
+                    alpha: Math.random(),
+                    speed: Math.random() * 0.02 + 0.005
+                });
+            }
+        }
+
+        // Dedicated Wishes Data for 6 Group Members
+        const groupWishes = {
+            "Thanh Tâm": "Chúc Thanh Tâm Trung Thu xinh xắn rạng rỡ, học giỏi xuất sắc, ăn bánh nướng bánh dẻo thả ga mà vòng eo vẫn đẹp 10/10!",
+            "Quỳnh Như": "Chúc Quỳnh Như luôn tươi tắn rạng rỡ như Hằng Nga, tràn ngập năng lượng tích cực, thi cử mượt mà điểm cao chót vót!",
+            "Quang Hiếu": "Chúc Quang Hiếu ngày càng đẹp trai phong độ, gánh team chơi game siêu mượt, tiền tài rủng rỉnh và sớm tìm được 'Chị Hằng' đời mình!",
+            "Huy Vũ": "Chúc Huy Vũ đẹp trai 10 điểm không có nhưng, luôn luôn vui vẻ, bứt phá mọi mục tiêu và gặt hái cực kỳ nhiều thành công!",
+            "Quỳnh Nga": "Chúc Quỳnh Nga luôn dịu dàng xinh đẹp, học tập thi cử may mắn đạt tối đa mọi điểm số, lúc nào cũng cười tươi như hoa!",
+            "Doãn Thái": "Cảm ơn 5 người bạn tuyệt vời đã luôn đồng hành cùng Thái! Chúc cho nhóm 6 đứa mình mãi bền chặt, Trung Thu năm nào cũng quây quần bên nhau!"
+        };
+
+        // Persistent member lanterns floating in the sky
+        let memberLanterns = [];
+        const memberNames = ["Thanh Tâm", "Quỳnh Như", "Quang Hiếu", "Huy Vũ", "Quỳnh Nga", "Doãn Thái"];
+
+        function positionMemberLanterns() {
+            memberLanterns = [];
+            const cols = Math.min(memberNames.length, 6);
+            const spacing = width / (cols + 1);
+
+            memberNames.forEach((name, index) => {
+                memberLanterns.push({
+                    name: name,
+                    x: spacing * (index + 1),
+                    y: height * 0.25 + (index % 2) * 50,
+                    radius: 24,
+                    speedY: 0.15,
+                    swaySpeed: 0.015,
+                    swayAmount: 1.2,
+                    angle: index * 1.2,
+                    wish: groupWishes[name]
+                });
+            });
+        }
+
+        // Dynamic extra sky lanterns
+        let extraLanterns = [];
+
+        // Fireworks particles on lantern click
+        let particles = [];
+        function createFireworks(x, y) {
+            const colors = ['#fbbf24', '#f59e0b', '#ef4444', '#38bdf8', '#a855f7'];
+            for (let i = 0; i < 40; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 5 + 2;
+                particles.push({
+                    x: x,
+                    y: y,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    alpha: 1,
+                    life: Math.random() * 30 + 30
+                });
+            }
+        }
+
+        function drawMoon() {
+            const moonX = width > 768 ? width * 0.85 : width * 0.8;
+            const moonY = Math.min(height * 0.18, 140);
+            const moonRadius = Math.min(width, height) * 0.08 + 22;
+
+            // Halo Glow
+            const glow = ctx.createRadialGradient(moonX, moonY, moonRadius * 0.8, moonX, moonY, moonRadius * 2.6);
+            glow.addColorStop(0, 'rgba(254, 240, 138, 0.45)');
+            glow.addColorStop(0.5, 'rgba(251, 191, 36, 0.15)');
+            glow.addColorStop(1, 'rgba(5, 8, 20, 0)');
+
+            ctx.fillStyle = glow;
+            ctx.beginPath();
+            ctx.arc(moonX, moonY, moonRadius * 2.6, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Moon Base Gradient
+            const moonGrad = ctx.createRadialGradient(moonX - moonRadius * 0.3, moonY - moonRadius * 0.3, 5, moonX, moonY, moonRadius);
+            moonGrad.addColorStop(0, '#fffbeb');
+            moonGrad.addColorStop(0.7, '#fef08a');
+            moonGrad.addColorStop(1, '#f59e0b');
+
+            ctx.fillStyle = moonGrad;
+            ctx.beginPath();
+            ctx.arc(moonX, moonY, moonRadius, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function renderLantern(l, isMember = false) {
+            // Glow
+            const lGlow = ctx.createRadialGradient(l.x, l.y, 2, l.x, l.y, l.radius * 2.2);
+            lGlow.addColorStop(0, 'rgba(253, 224, 71, 0.85)');
+            lGlow.addColorStop(0.5, 'rgba(239, 68, 68, 0.35)');
+            lGlow.addColorStop(1, 'rgba(239, 68, 68, 0)');
+
+            ctx.fillStyle = lGlow;
+            ctx.beginPath();
+            ctx.arc(l.x, l.y, l.radius * 2.2, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Lantern Body
+            ctx.fillStyle = isMember ? '#dc2626' : '#ea580c';
+            ctx.beginPath();
+            ctx.roundRect(l.x - l.radius * 0.7, l.y - l.radius, l.radius * 1.4, l.radius * 1.8, 8);
+            ctx.fill();
+
+            // Gold Trim Line
+            ctx.strokeStyle = '#fde047';
+            ctx.lineWidth = 1.5;
+            ctx.strokeRect(l.x - l.radius * 0.7, l.y - l.radius, l.radius * 1.4, l.radius * 1.8);
+
+            // Core Flame
+            ctx.fillStyle = '#fef08a';
+            ctx.beginPath();
+            ctx.arc(l.x, l.y + l.radius * 0.2, l.radius * 0.35, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Member Tag Text
+            ctx.font = 'bold 12px "Be Vietnam Pro"';
+            ctx.fillStyle = '#fde047';
+            ctx.textAlign = 'center';
+            ctx.fillText(l.name, l.x, l.y + l.radius + 16);
+        }
+
+        function animateSky() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Draw Stars
+            stars.forEach(star => {
+                star.alpha += star.speed;
+                if (star.alpha > 1 || star.alpha < 0) star.speed = -star.speed;
+                ctx.fillStyle = `rgba(255, 255, 255, ${Math.abs(star.alpha)})`;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // Draw Moon
+            drawMoon();
+
+            // Draw Member Floating Lanterns
+            memberLanterns.forEach(l => {
+                l.angle += l.swaySpeed;
+                l.x += Math.sin(l.angle) * 0.4;
+                l.y += Math.cos(l.angle) * 0.2;
+
+                renderLantern(l, true);
+            });
+
+            // Extra Floating Lanterns
+            extraLanterns.forEach((l, index) => {
+                l.y -= l.speedY;
+                l.angle += l.swaySpeed;
+                l.x += Math.sin(l.angle) * l.swayAmount;
+
+                renderLantern(l, false);
+
+                if (l.y < -60) {
+                    extraLanterns.splice(index, 1);
+                }
+            });
+
+            // Render Fireworks Particles
+            particles.forEach((p, index) => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.05; // gravity
+                p.alpha -= 0.02;
+
+                ctx.fillStyle = p.color;
+                ctx.globalAlpha = Math.max(0, p.alpha);
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.globalAlpha = 1;
+
+                if (p.alpha <= 0) particles.splice(index, 1);
+            });
+
+            requestAnimationFrame(animateSky);
+        }
+
+        initStars();
+        positionMemberLanterns();
+        animateSky();
+
+        // Canvas Click Handler to open Member Modal when clicked on their lantern
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const clickY = e.clientY - rect.top;
+
+            memberLanterns.forEach(l => {
+                const dist = Math.hypot(clickX - l.x, clickY - l.y);
+                if (dist < l.radius * 2) {
+                    createFireworks(l.x, l.y);
+                    openMemberModal(l.name);
+                }
+            });
+        });
+
+        let currentModalMember = "";
+
+        function openMemberModal(name) {
+            currentModalMember = name;
+            document.getElementById('modalMemberName').innerText = name;
+            document.getElementById('modalMemberWish').innerText = `"${groupWishes[name]}"`;
+            document.getElementById('memberModal').classList.remove('hidden');
+        }
+
+        function triggerMemberLantern(name) {
+            const memberObj = memberLanterns.find(m => m.name.includes(name));
+            if (memberObj) {
+                createFireworks(memberObj.x, memberObj.y);
+            }
+            openMemberModal(name);
+        }
+
+        function closeMemberModal() {
+            document.getElementById('memberModal').classList.add('hidden');
+        }
+
+        function copyModalWish() {
+            if (!currentModalMember) return;
+            copyToClipboard(groupWishes[currentModalMember]);
+            showNotification(`Đã sao chép lời chúc của ${currentModalMember}!`);
+        }
+
+        function sendModalWishToCard() {
+            closeMemberModal();
+            document.getElementById('recipientSelect').value = currentModalMember;
+            document.getElementById('wishMessageInput').value = groupWishes[currentModalMember];
+            updateCardDisplay();
+            switchTab('card');
+            showNotification(`Đã chuyển lời chúc của ${currentModalMember} vào thiệp!`);
+        }
+
+        function releaseExtraLantern() {
+            const name = document.getElementById('extraNameInput').value;
+            const wish = document.getElementById('extraWishInput').value.trim() || "Chúc cả nhóm mãi gắn kết!";
+
+            extraLanterns.push({
+                name: name,
+                x: width / 2 + (Math.random() * 200 - 100),
+                y: height + 30,
+                radius: 20,
+                speedY: Math.random() * 0.8 + 0.5,
+                swaySpeed: 0.02,
+                swayAmount: 1.5,
+                angle: 0,
+                wish: wish
+            });
+
+            document.getElementById('extraWishInput').value = "";
+            showNotification(`🏮 Đèn lồng tâm nguyện của ${name} đã bay lên trời!`);
+        }
+
+        /* =========================================================================
+           3. CARD CREATOR & CANVAS EXPORT ENGINE
+           ========================================================================= */
+        const senderInput = document.getElementById('senderInput');
+        const recipientSelect = document.getElementById('recipientSelect');
+        const wishMessageInput = document.getElementById('wishMessageInput');
+
+        function applyRecipientPreset() {
+            const selected = recipientSelect.value;
+            if (groupWishes[selected]) {
+                wishMessageInput.value = groupWishes[selected];
+            } else if (selected === "Cả Hội 6 Anh Em") {
+                wishMessageInput.value = "Gửi cả nhóm 6 đứa mình: Chúc tình bạn của chúng ta mãi bền chặt như nhân bánh nướng thập cẩm, Trung thu nào cũng quây quần vui vẻ bên nhau!";
+            }
+            updateCardDisplay();
+        }
+
+        function updateCardDisplay() {
+            document.getElementById('cardSenderDisplay').innerText = senderInput.value || "Thái";
+            document.getElementById('cardRecipientDisplay').innerText = recipientSelect.value;
+            document.getElementById('cardMessageDisplay').innerText = `"${wishMessageInput.value || 'Chúc mừng Trung Thu!'}"`;
+        }
+
+        senderInput.addEventListener('input', updateCardDisplay);
+        wishMessageInput.addEventListener('input', updateCardDisplay);
+        applyRecipientPreset(); // Init default fill
+
+        function selectPresetWish() {
+            const val = document.getElementById('presetWishes').value;
+            if (val) {
+                wishMessageInput.value = val;
+                updateCardDisplay();
+            }
+        }
+
+        function setCardTheme(themeClass) {
+            const card = document.getElementById('cardPreview');
+            card.className = `${themeClass} w-full max-w-md aspect-[4/5] rounded-2xl p-6 sm:p-8 relative flex flex-col justify-between shadow-2xl border-2 border-amber-400/60 overflow-hidden transition-all `;
+            
+            if (themeClass === 'theme-gold') {
+                card.classList.add('bg-gradient-to-b', 'from-slate-950', 'via-amber-950/40', 'to-slate-950');
+            } else if (themeClass === 'theme-red') {
+                card.classList.add('bg-gradient-to-b', 'from-slate-950', 'via-red-950/40', 'to-slate-950');
+            } else {
+                card.classList.add('bg-gradient-to-b', 'from-slate-950', 'via-indigo-950/40', 'to-slate-950');
+            }
+        }
+
+        function copyCardText() {
+            const fullText = `Thân gửi ${recipientSelect.value},\n${wishMessageInput.value}\n- Từ ${senderInput.value} (Hội 6 Anh Em Trung Thu 2026)`;
+            copyToClipboard(fullText);
+            showNotification("Đã sao chép lời chúc thành công!");
+        }
+
+        function downloadCardImage() {
+            const c = document.createElement('canvas');
+            c.width = 600;
+            c.height = 750;
+            const cx = c.getContext('2d');
+
+            // Background Gradient
+            const bgGrad = cx.createLinearGradient(0, 0, 0, 750);
+            bgGrad.addColorStop(0, '#020617');
+            bgGrad.addColorStop(0.5, '#451a03');
+            bgGrad.addColorStop(1, '#020617');
+            cx.fillStyle = bgGrad;
+            cx.fillRect(0, 0, 600, 750);
+
+            // Borders
+            cx.strokeStyle = '#fbbf24';
+            cx.lineWidth = 4;
+            cx.strokeRect(20, 20, 560, 710);
+
+            cx.strokeStyle = 'rgba(251, 191, 36, 0.4)';
+            cx.lineWidth = 1;
+            cx.strokeRect(30, 30, 540, 690);
+
+            // Header
+            cx.fillStyle = '#fde047';
+            cx.font = 'bold 18px "Be Vietnam Pro"';
+            cx.textAlign = 'center';
+            cx.fillText('TRUNG THU • HỘI 6 ANH EM', 300, 80);
+
+            cx.fillStyle = '#fbbf24';
+            cx.font = 'bold 42px "Pattaya", cursive';
+            cx.fillText('Thiệp Trăng Rằm', 300, 135);
+
+            // Recipient
+            cx.fillStyle = '#fef08a';
+            cx.font = 'bold 20px "Be Vietnam Pro"';
+            cx.fillText(`Thân gửi: ${recipientSelect.value} ✨`, 300, 210);
+
+            // Message wrapping
+            cx.fillStyle = '#ffffff';
+            cx.font = 'italic 22px "Playfair Display", serif';
+            const lines = wrapText(cx, `"${wishMessageInput.value}"`, 460);
+            let startY = 300;
+            lines.forEach(line => {
+                cx.fillText(line, 300, startY);
+                startY += 38;
+            });
+
+            // Sender
+            cx.textAlign = 'right';
+            cx.fillStyle = '#fde047';
+            cx.font = '16px "Be Vietnam Pro"';
+            cx.fillText('Từ người bạn trong nhóm:', 520, 630);
+
+            cx.font = 'bold 32px "Pattaya"';
+            cx.fillText(senderInput.value || 'Thái', 520, 670);
+
+            // Download Trigger
+            const link = document.createElement('a');
+            link.download = `Thiep_Trung_Thu_${recipientSelect.value}.png`;
+            link.href = c.toDataURL('image/png');
+            link.click();
+
+            showNotification("Đã tải ảnh thiệp PNG về máy! Bạn có thể gửi ngay vào nhóm!");
+        }
+
+        function wrapText(context, text, maxWidth) {
+            const words = text.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                const word = words[i];
+                const width = context.measureText(currentLine + " " + word).width;
+                if (width < maxWidth) {
+                    currentLine += " " + word;
+                } else {
+                    lines.push(currentLine);
+                    currentLine = word;
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        /* =========================================================================
+           4. FORTUNE TELLER & MINI GAME LOGIC
+           ========================================================================= */
+        const fortuneList = [
+            "Quẻ Đại Cát: Bạn được nhận đặc quyền ăn 10 cái bánh nướng mà vòng eo vẫn đẹp 10/10!",
+            "Quẻ Đào Hoa: Chú Cuội/Chị Hằng sẽ sớm gọi tên bạn trong danh sách thoát F.A!",
+            "Quẻ Học Đỉnh: Thi cử thuận lợi, điểm số cao chót vót như đỉnh ngọn dừa!",
+            "Quẻ Bất Bại: Đánh game gánh team cực mượt, chiến thắng xuyên màn đêm!",
+            "Quẻ Bội Thu: Tiền tài rủng rỉnh, đi đâu cũng được người yêu quý nương nuông!",
+            "Quẻ Tình Bạn: Nhóm 6 đứa mình mãi gắn kết bền chặt như nhân bánh nướng thập cẩm!"
+        ];
+
+        let currentFortune = "";
+
+        function drawFortune() {
+            const holder = document.getElementById('stickHolder');
+            const stick = document.getElementById('activeStick');
+            holder.classList.add('shaking');
+
+            setTimeout(() => {
+                holder.classList.remove('shaking');
+                stick.style.transform = "translateY(-28px)";
+
+                const randomIndex = Math.floor(Math.random() * fortuneList.length);
+                currentFortune = fortuneList[randomIndex];
+
+                document.getElementById('fortuneTitle').innerText = `✨ Quẻ Cát Tường #${randomIndex + 1}`;
+                document.getElementById('fortuneText').innerText = `"${currentFortune}"`;
+                document.getElementById('fortuneResult').classList.remove('hidden');
+
+                createFireworks(width / 2, height / 2);
+
+                setTimeout(() => {
+                    stick.style.transform = "translateY(-16px)";
+                }, 1000);
+            }, 600);
+        }
+
+        function copyFortune() {
+            if (!currentFortune) return;
+            copyToClipboard(currentFortune);
+            showNotification("Đã sao chép quẻ may mắn!");
+        }
+
+        function useFortuneInCard() {
+            if (!currentFortune) return;
+            document.getElementById('wishMessageInput').value = currentFortune;
+            updateCardDisplay();
+            switchTab('card');
+            showNotification("Đã chuyển quẻ lời chúc vào thiệp!");
+        }
+
+        /* Mini Game Engine */
+        const gameCanvas = document.getElementById('gameCanvas');
+        const gCtx = gameCanvas.getContext('2d');
+
+        let gameRunning = false;
+        let score = 0;
+        let lives = 3;
+        let highScore = localStorage.getItem('group_mooncake_highscore') || 0;
+        document.getElementById('gameHighScore').innerText = highScore;
+
+        let basket = {
+            x: 0,
+            y: 0,
+            width: 80,
+            height: 30
+        };
+
+        let items = [];
+        let gameLoopId = null;
+
+        function resizeGameCanvas() {
+            const rect = gameCanvas.parentElement.getBoundingClientRect();
+            gameCanvas.width = rect.width;
+            gameCanvas.height = rect.height;
+            basket.y = gameCanvas.height - 40;
+            basket.x = gameCanvas.width / 2 - basket.width / 2;
+        }
+
+        function initAndStartGame() {
+            resizeGameCanvas();
+            score = 0;
+            lives = 3;
+            items = [];
+            gameRunning = true;
+
+            document.getElementById('gameScore').innerText = score;
+            document.getElementById('gameLives').innerText = "❤️❤️❤️";
+            document.getElementById('gameOverlay').classList.add('hidden');
+
+            if (gameLoopId) cancelAnimationFrame(gameLoopId);
+            runGame();
+        }
+
+        function spawnItem() {
+            if (Math.random() < 0.035) {
+                const rand = Math.random();
+                let type = 'cake_baked';
+                if (rand > 0.85) type = 'bomb';
+                else if (rand > 0.7) type = 'gold_star';
+                else if (rand > 0.4) type = 'cake_sticky';
+
+                items.push({
+                    x: Math.random() * (gameCanvas.width - 30),
+                    y: -30,
+                    size: 28,
+                    speed: Math.random() * 2 + 2,
+                    type: type
+                });
+            }
+        }
+
+        function runGame() {
+            if (!gameRunning) return;
+
+            gCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+
+            // Basket
+            gCtx.fillStyle = '#fbbf24';
+            gCtx.beginPath();
+            gCtx.roundRect(basket.x, basket.y, basket.width, basket.height, 10);
+            gCtx.fill();
+
+            gCtx.fillStyle = '#ffffff';
+            gCtx.font = '20px sans-serif';
+            gCtx.fillText('🐇', basket.x + basket.width / 2 - 10, basket.y + 22);
+
+            spawnItem();
+
+            items.forEach((item, index) => {
+                item.y += item.speed;
+
+                gCtx.font = '24px sans-serif';
+                if (item.type === 'cake_baked') gCtx.fillText('🥮', item.x, item.y);
+                else if (item.type === 'cake_sticky') gCtx.fillText('🍡', item.x, item.y);
+                else if (item.type === 'gold_star') gCtx.fillText('⭐', item.x, item.y);
+                else if (item.type === 'bomb') gCtx.fillText('💣', item.x, item.y);
+
+                // Collision
+                if (
+                    item.y >= basket.y - 15 &&
+                    item.y <= basket.y + basket.height &&
+                    item.x >= basket.x - 15 &&
+                    item.x <= basket.x + basket.width
+                ) {
+                    if (item.type === 'cake_baked') score += 10;
+                    else if (item.type === 'cake_sticky') score += 15;
+                    else if (item.type === 'gold_star') score += 30;
+                    else if (item.type === 'bomb') {
+                        lives--;
+                        document.getElementById('gameLives').innerText = "❤️".repeat(Math.max(0, lives));
+                        if (lives <= 0) gameOver();
+                    }
+
+                    document.getElementById('gameScore').innerText = score;
+                    items.splice(index, 1);
+                } else if (item.y > gameCanvas.height + 30) {
+                    items.splice(index, 1);
+                }
+            });
+
+            gameLoopId = requestAnimationFrame(runGame);
+        }
+
+        function gameOver() {
+            gameRunning = false;
+            if (score > highScore) {
+                highScore = score;
+                localStorage.setItem('group_mooncake_highscore', highScore);
+                document.getElementById('gameHighScore').innerText = highScore;
+            }
+
+            document.getElementById('gameOverlayTitle').innerText = "Kết Thúc Màn Chơi!";
+            document.getElementById('gameOverlayDesc').innerText = `Bạn đạt được ${score} điểm! Kỷ lục nhóm hiện tại: ${highScore} điểm.`;
+            document.getElementById('startGameBtn').innerHTML = `<i class="fa-solid fa-rotate-right mr-2"></i> Chơi Lại`;
+            document.getElementById('gameOverlay').classList.remove('hidden');
+        }
+
+        // Game Controls
+        window.addEventListener('mousemove', (e) => {
+            if (!gameRunning) return;
+            const rect = gameCanvas.getBoundingClientRect();
+            basket.x = e.clientX - rect.left - basket.width / 2;
+        });
+
+        gameCanvas.addEventListener('touchmove', (e) => {
+            if (!gameRunning) return;
+            const rect = gameCanvas.getBoundingClientRect();
+            basket.x = e.touches[0].clientX - rect.left - basket.width / 2;
+            e.preventDefault();
+        }, { passive: false });
+
+        document.getElementById('btnLeft').addEventListener('click', () => {
+            basket.x = Math.max(0, basket.x - 40);
+        });
+        document.getElementById('btnRight').addEventListener('click', () => {
+            basket.x = Math.min(gameCanvas.width - basket.width, basket.x + 40);
+        });
+
+        /* Tab Navigation Switcher */
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('active', 'bg-amber-500/20', 'text-amber-300', 'border', 'border-amber-500/40', 'shadow-inner');
+                el.classList.add('text-gray-300');
+            });
+
+            document.getElementById(`content-${tabName}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tab-${tabName}`);
+            activeBtn.classList.add('active', 'bg-amber-500/20', 'text-amber-300', 'border', 'border-amber-500/40', 'shadow-inner');
+
+            if (tabName === 'game') {
+                setTimeout(resizeGameCanvas, 100);
+            }
+        }
+
+        /* Helper Functions */
+        function showNotification(msg) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-6 right-6 z-50 glass-panel px-5 py-3 rounded-2xl text-amber-300 text-xs sm:text-sm font-semibold shadow-2xl border border-amber-400/50 flex items-center gap-2 animate-bounce';
+            toast.innerHTML = `<i class="fa-solid fa-circle-check text-amber-400"></i> ${msg}`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        function copyToClipboard(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+        }
+    </script>
+</body>
+</html>
