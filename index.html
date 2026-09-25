@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Đêm Rằm F6 Squad 🥮✨</title>
 
-  <!-- Google Fonts & Canvas2Image Library -->
+  <!-- Google Fonts & html2canvas -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600;1,800&display=swap" rel="stylesheet">
@@ -40,7 +40,7 @@
       position: relative;
     }
 
-    /* Màn hình Chào mừng */
+    /* Welcome Overlay */
     .welcome-overlay {
       position: fixed;
       top: 0;
@@ -107,7 +107,7 @@
       transform: scale(1.05);
     }
 
-    /* Canvas Bầu Trời */
+    /* Sky Canvas Background */
     #skyCanvas {
       position: fixed;
       top: 0;
@@ -118,7 +118,7 @@
       pointer-events: auto;
     }
 
-    /* Widget Nhạc Vinyl */
+    /* Music Vinyl Widget */
     .music-widget {
       position: fixed;
       top: 15px;
@@ -170,7 +170,7 @@
       color: #94a3b8;
     }
 
-    /* Container chính */
+    /* Main Container */
     .app-container {
       position: relative;
       z-index: 10;
@@ -208,7 +208,7 @@
       font-weight: 700;
     }
 
-    /* Layout 3 Cột Ngang Cân Đối */
+    /* Balanced 3-Column Layout */
     .top-cards-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -252,7 +252,7 @@
       line-height: 1.4;
     }
 
-    /* Grid Thành Viên F6 */
+    /* Member Buttons Grid */
     .f6-members-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -308,7 +308,7 @@
       color: var(--gold);
     }
 
-    /* Form Tạo Thiệp */
+    /* Form Controls */
     .form-group {
       margin-bottom: 12px;
     }
@@ -347,7 +347,7 @@
       min-height: 60px;
     }
 
-    /* KHUNG XEM TRƯỚC THIỆP SANG TRỌNG */
+    /* CARD PREVIEW DESIGN (CLEAN & ELEGANT) */
     .card-preview-box {
       background: linear-gradient(135deg, #2c0505 0%, #120224 100%);
       border: 2px solid var(--gold);
@@ -427,7 +427,7 @@
       background: linear-gradient(135deg, #ff4d4d, #cc0000);
     }
 
-    /* GIEO QUẺ TRUNG THU TRUYỀN THỐNG (ỐNG XĂM TRE) */
+    /* TRADITIONAL BAMBOO FORTUNE TUBE */
     .fortune-section {
       text-align: center;
       display: flex;
@@ -673,7 +673,7 @@
       font-size: 0.85rem;
     }
 
-    /* Toast */
+    /* Toast Notification */
     .toast-msg {
       position: fixed;
       bottom: 25px;
@@ -710,24 +710,24 @@
 </head>
 <body>
 
-  <!-- Audio -->
+  <!-- Audio element for nhac.mp3 -->
   <audio id="customAudio" loop preload="auto">
     <source src="nhac.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Màn hình Chào mừng -->
+  <!-- Welcome Overlay Screen -->
   <div class="welcome-overlay" id="welcomeOverlay">
     <div class="welcome-box">
       <h1>🥮 Trung Thu F6 🌕</h1>
-      <p>Chào mừng bạn đến với trang web Đêm Rằm dành riêng cho nhóm <strong>F6 (Thanh Tâm, Quỳnh Như, Quang Hiếu, Huy Vũ, Quỳnh Nga & Lê Doãn Thái)</strong>!</p>
+      <p>Chào mừng bạn đến với không gian Đêm Rằm lung linh dành riêng cho nhóm <strong>F6 (Thanh Tâm, Quỳnh Như, Quang Hiếu, Huy Vũ, Quỳnh Nga & Lê Doãn Thái)</strong>!</p>
       <button class="btn-welcome" id="btnEnterApp">🥮 Mở Quà & Thắp Đèn F6</button>
     </div>
   </div>
 
-  <!-- Bầu trời Canvas -->
+  <!-- Sky Canvas Background -->
   <canvas id="skyCanvas"></canvas>
 
-  <!-- Trình phát nhạc Vinyl -->
+  <!-- Vinyl Record Audio Control Widget -->
   <div class="music-widget interactive-element">
     <div class="vinyl-record" id="vinylBtn">
       <span style="font-size: 11px;">🎵</span>
@@ -738,17 +738,17 @@
     </div>
   </div>
 
-  <!-- Giao diện ứng dụng -->
+  <!-- App Container -->
   <div class="app-container">
     <header class="interactive-element">
       <h1 class="main-title">Đêm Rằm F6 Squad</h1>
       <p class="sub-title">TRUNG THU VUI VẺ • GẮN KẾT YÊU THƯƠNG</p>
     </header>
 
-    <!-- Hàng 3 Cột Ngang Cân Đối -->
+    <!-- 3-Column Top Grid -->
     <div class="top-cards-grid">
 
-      <!-- Cột 1: Đèn Lồng F6 -->
+      <!-- Column 1: Member Lanterns -->
       <div class="card-panel interactive-element">
         <div class="panel-header">
           <span class="panel-icon">🏮</span>
@@ -758,7 +758,7 @@
         <div class="f6-members-grid" id="membersGrid"></div>
       </div>
 
-      <!-- Cột 2: Tạo Thiệp -->
+      <!-- Column 2: Card Generator (Avatar Preview + "Gửi <Tên>", No To/From) -->
       <div class="card-panel interactive-element" id="cardGeneratorSection">
         <div class="panel-header">
           <span class="panel-icon">💌</span>
@@ -781,9 +781,9 @@
         <div class="form-group">
           <label>Mẫu lời chúc có sẵn:</label>
           <select class="form-control" id="cardWishPreset">
-            <option value="Chúc nhóm F6 Trung Thu ngập tràn tiếng cười, điểm cao chót vót, ăn bánh trung thu không sợ béo!">Mẫu 1: Vui vẻ & Học tốt</option>
-            <option value="Trung Thu này chúc bạn tôi sớm có người yêu, tiền vào như nước, đẹp trai đẹp gái nhất xóm!">Mẫu 2: Tài lộc & Tình duyên</option>
-            <option value="Cảm ơn vì đã luôn là 1 phần tuyệt vời của F6. Mãi bên nhau bạn nhé!">Mẫu 3: Tình bạn bền chặt</option>
+            <option value="Chúc bạn một mùa Trung Thu ngập tràn tiếng cười, ngọt ngào như vị bánh nướng bánh dẻo, rực rỡ như ánh đèn lồng đêm rằm!">Mẫu 1: Vui vẻ & Ngọt ngào</option>
+            <option value="Dưới ánh trăng rằm tháng Tám tròn đầy, chúc bạn luôn bình an, xinh đẹp rạng rỡ, vạn sự như ý và thi cử luôn đạt kết quả xuất sắc!">Mẫu 2: Bình an & Thi cử đỗ đạt</option>
+            <option value="Chúc bạn đón Tết Trung Thu ấm áp bên gia đình và bạn bè, tâm hồn luôn an nhiên, trí tuệ sáng tỏ và gặp thật nhiều may mắn!">Mẫu 3: Ấm áp & May mắn</option>
             <option value="CUSTOM">-- Tự nhập lời chúc riêng --</option>
           </select>
         </div>
@@ -793,22 +793,22 @@
           <textarea class="form-control" id="customWishInput" placeholder="Viết lời chúc thân thương tại đây..."></textarea>
         </div>
 
-        <!-- MẪU THIỆP SANG TRỌNG XUẤT PNG -->
+        <!-- CARD PREVIEW DESIGN FOR EXPORT -->
         <div class="card-preview-box" id="cardExportTarget">
           <div class="card-preview-title">Happy Mid-Autumn</div>
           
           <div class="card-preview-avatar" id="cardPreviewAvatarBox">
-            <!-- JS chèn avatar người nhận -->
+            <!-- JS inserts recipient's avatar here -->
           </div>
 
           <div class="card-preview-to" id="cardReceiverDisplay">Gửi Cả Nhóm F6 Super Stars</div>
-          <div class="card-preview-text" id="cardTextDisplay">"Chúc nhóm F6 Trung Thu ngập tràn tiếng cười..."</div>
+          <div class="card-preview-text" id="cardTextDisplay">"Chúc bạn một mùa Trung Thu ngập tràn tiếng cười..."</div>
         </div>
 
         <button class="btn-action" id="btnDownloadCard">📸 Tải Thiệp Về Máy (PNG)</button>
       </div>
 
-      <!-- Cột 3: Gieo Quẻ Trung Thu (Ống Xăm Tre) -->
+      <!-- Column 3: Traditional Fortune Bamboo Tube -->
       <div class="card-panel interactive-element">
         <div class="panel-header">
           <span class="panel-icon">🎋</span>
@@ -823,7 +823,7 @@
             </div>
             <div class="bamboo-tube"></div>
           </div>
-          <p class="panel-desc">Chạm vào ống xăm để xóc quẻ Trung Thu F6!</p>
+          <p class="panel-desc">Chạm vào ống xăm để xóc quẻ Trung Thu!</p>
           
           <button class="btn-action" id="btnShakeFortune" style="margin-top: 5px;">🎋 Xóc Quẻ Đêm Rằm</button>
 
@@ -838,12 +838,12 @@
 
   </div>
 
-  <!-- Pop-up Modal Lời Chúc Thành Viên -->
+  <!-- Member Popup Wish Modal -->
   <div class="modal-overlay" id="wishModal">
     <div class="modal-card">
       <div class="btn-modal-close" id="btnCloseModal">✕</div>
       <div class="modal-avatar-box" id="modalAvatarWrapper"></div>
-      <div class="modal-subtitle">ĐÈN LỒNG LỜI CHÚC F6</div>
+      <div class="modal-subtitle">ĐÈN LỒNG LỜI CHÚC</div>
       <h3 class="modal-name" id="modalName">Tên Thành Viên</h3>
       <div class="modal-divider"></div>
       <div class="modal-body" id="modalWishContent">"Lời chúc..."</div>
@@ -858,61 +858,65 @@
   <div class="toast-msg" id="toastMsg">Đã sao chép lời chúc!</div>
 
   <script>
-    /* DỮ LIỆU THÀNH VIÊN F6 - LỜI CHÚC DÀI & Ý NGHĨA */
+    /* 
+       MEMBER DATA:
+       - Individual system wishes (NO "F6" or "nhóm F6" in individual member wishes)
+       - Strictly Mid-Autumn theme
+       - Huy Vũ emoji set to boy 👦🏻
+    */
     const f6Members = [
       {
         id: "thanhtam",
         name: "Thanh Tâm",
         avatar: "thanhtam.jpg",
         emoji: "👧🏻",
-        wish: "Chúc Thanh Tâm một mùa Trung Thu thật ấm áp, xinh đẹp rạng rỡ như ánh trăng rằm tháng Tám. Mong rằng bước sang tuổi mới, Tâm luôn giữ vững nụ cười hồn nhiên, thi cử đạt kết quả tuyệt vời và luôn là mảnh ghép dịu dàng, đáng yêu không thể thiếu của gia đình F6!"
+        wish: "Chúc Thanh Tâm một mùa Trung Thu thật ấm áp, xinh đẹp rạng rỡ như ánh trăng rằm tháng Tám! Mong rằng bước sang mùa thu mới, Tâm luôn giữ vững nụ cười hồn nhiên, thi cử đạt kết quả tuyệt vời, vạn sự suôn sẻ và có một đêm phá cỗ ngập tràn niềm vui cùng những người thân yêu!"
       },
       {
         id: "quynhnhu",
         name: "Quỳnh Như",
         avatar: "quynhnhu.jpg",
         emoji: "👩🏻",
-        wish: "Chúc Quỳnh Như một mùa Trăng rằm tràn ngập niềm vui và năng lượng tích cực! Mong Như luôn rực rỡ như Hằng Nga, mọi ước mơ đều trở thành hiện thực, thi cử thuận lợi mượt mà điểm cao chót vót và mãi giữ trọn tình bạn gắn kết, ngọt ngào cùng F6 nhé!"
+        wish: "Chúc Quỳnh Như đón mùa Tết Trung Thu thật ấm áp và tràn ngập tiếng cười! Cầu chúc cho Như luôn giữ trọn nụ cười rạng rỡ như Hằng Nga, mọi ước mơ đều tỏa sáng rực rỡ như vầng trăng tròn, thi cử mượt mà điểm cao chót vót và may mắn ngọt ngào như vị bánh nướng bánh dẻo đêm rằm!"
       },
       {
         id: "quanghieu",
         name: "Quang Hiếu",
         avatar: null,
         emoji: "👦🏻",
-        wish: "Chúc Quang Hiếu đón Tết Trung Thu tràn đầy niềm vui, phong độ vững vàng và gánh team mọi trận đấu! Mong rằng Hiếu luôn giữ được tinh thần nhiệt huyết, học tập đỉnh cao, sớm tìm được 'nửa kia' cùng đi phá cỗ và luôn là người bạn đáng tin cậy của nhóm F6!"
+        wish: "Chúc Quang Hiếu một đêm Rằm Trung Thu thật phong độ, trọn vẹn niềm vui và bứt phá thành công! Mong Hiếu luôn giữ vững nhiệt huyết, trí tuệ minh mẫn, thi đâu đỗ đó, gặt hái nhiều kết quả xuất sắc và sớm tìm được một nửa ngọt ngào cùng thưởng trăng phá cỗ!"
       },
       {
         id: "huyvu",
         name: "Huy Vũ",
         avatar: null,
-        emoji: "👦🏻", // Sửa thành con trai
-        wish: "Chúc Huy Vũ một đêm Rằm Trung Thu thật rực rỡ và ý nghĩa! Dưới ánh trăng thu trong trẻo, chúc Vũ luôn giữ được chí lớn, bản lĩnh kiên cường, sức khỏe dào dạt, thi cử luôn đỗ đạt cao và cùng hội anh em F6 kiến tạo thêm thật nhiều kỷ niệm đẹp không bao giờ quên!"
+        emoji: "👦🏻", // Boy emoji
+        wish: "Chúc Huy Vũ một mùa Tết Trung Thu đong đầy kỷ niệm và ngập tràn niềm vui! Dưới ánh trăng thu vẹn tròn, chúc Vũ luôn kiên cường, bản lĩnh, đường học hành sự nghiệp hanh thông, vạn sự suôn sẻ và luôn đón nhận những điều may mắn, tốt đẹp nhất!"
       },
       {
         id: "quynhnga",
         name: "Quỳnh Nga",
         avatar: null,
         emoji: "👩🏼",
-        wish: "Chúc Quỳnh Nga một mùa Trung Thu ngập tràn bánh ngọt, quà thơm và những nụ cười hạnh phúc! Mong Nga luôn giữ được sự đáng yêu, bình an trong tâm hồn, thi đâu trúng đó và mãi là ngọn lửa ấm áp thắp sáng không khí của gia đình F6 chúng mình!"
+        wish: "Chúc Quỳnh Nga đón Tết Trung Thu thật dịu dàng, bình an và ngập tràn quà thơm bánh ngọt! Mong Nga luôn rạng rỡ, đáng yêu, tâm hồn thư thái như tiết trời sang thu, học tập đạt kết quả cao và lúc nào cũng tràn đầy năng lượng hạnh phúc!"
       },
       {
         id: "doanthai",
         name: "Lê Doãn Thái",
         avatar: "doanthai.jpg",
         emoji: "🧑🏻‍💻",
-        wish: "Chúc Lê Doãn Thái đón một đêm Rằm Trung Thu thật ngầu, code chạy mượt mà không bao giờ gặp bug! Cảm ơn Thái vì đã luôn tâm huyết xây dựng những kỷ niệm tuyệt vời cho F6. Chúc Thái sức khỏe, học tập xuất sắc và tương lai luôn tỏa sáng như vầng trăng rằm!"
+        wish: "Chúc Lê Doãn Thái một đêm Rằm Trung Thu thật rực rỡ và bùng nổ năng lượng! Mong Thái luôn dồi dào sức khỏe, trí tuệ sáng suốt, mọi dự định đều thành công viên mãn và có những phút giây thưởng trăng, phá cỗ thật ý nghĩa bên gia đình và những người thân yêu!"
       }
     ];
 
     const fortunesList = [
-      { title: "Quẻ Số 01 - Thượng Thượng Cát", desc: "Trung Thu này nhóm F6 ăn bánh không béo, thi cử toàn 10, vận may ngập tràn từ nhà ra ngõ!" },
-      { title: "Quẻ Số 02 - Tình Duyên Cát Phục", desc: "Ai đang F.A trong F6 sắp sửa bị dính bùa yêu, Trung Thu sang năm đi chơi có đôi có cặp siêu ngọt ngào!" },
-      { title: "Quẻ Số 03 - Tài Lộc Đại Phát", desc: "Tiền vào như nước sông Hồng, tiền ra nhỏ giọt như cà phê phin. Sắm đồ chơi Trung Thu thả ga!" },
+      { title: "Quẻ Số 01 - Thượng Thượng Cát", desc: "Ánh trăng chiếu sáng con đường học vấn, thi cử đại cát, học đâu hiểu đó, điểm số max chót vót!" },
+      { title: "Quẻ Số 02 - Tình Duyên Rực Rỡ", desc: "Hằng Nga ban duyên, sớm gặp được người tâm giao hiểu lòng, tình cảm ngọt ngào như nhân bánh nướng!" },
+      { title: "Quẻ Số 03 - Tài Lộc Bội Thu", desc: "Tiền tài rủng rỉnh, lộc lá vây quanh, tiêu xài thoải mái không lo nghĩ, ăn bánh trung thu không béo!" },
       { title: "Quẻ Số 04 - Trí Tuệ Hanh Thông", desc: "Học đâu hiểu đó, thi cử điểm max gánh team cực ngầu. Mọi dự định năm nay đều thành công rực rỡ!" },
-      { title: "Quẻ Số 05 - Bền Chặt Trường Cửu", desc: "Tình bạn nhóm F6 bền vững như thái sơn, mãi gắn kết yêu thương và có thêm nhiều chuyến đi chơi bùng nổ!" }
+      { title: "Quẻ Số 05 - Bình An Trọn Vẹn", desc: "Mọi sóng gió qua đi, cuộc sống êm đềm ấm áp như chén trà thơm thưởng thức dưới trăng rằm." }
     ];
 
-    /* Phát Nhạc */
     const customAudio = document.getElementById('customAudio');
     const vinylBtn = document.getElementById('vinylBtn');
     const musicStatusText = document.getElementById('musicStatusText');
@@ -956,7 +960,6 @@
     document.addEventListener('click', () => { if (!isPlaying) startMusic(); }, { once: true });
     vinylBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleMusic(); });
 
-    /* Sky Canvas */
     const skyCanvas = document.getElementById('skyCanvas');
     const ctx = skyCanvas.getContext('2d');
     let width, height;
@@ -1112,7 +1115,6 @@
     resizeSky();
     animateSky();
 
-    /* Nút Thành Viên F6 */
     const membersGrid = document.getElementById('membersGrid');
     const wishModal = document.getElementById('wishModal');
     const modalAvatarWrapper = document.getElementById('modalAvatarWrapper');
@@ -1191,7 +1193,12 @@
       setTimeout(() => { toastMsg.classList.remove('show'); }, 2000);
     }
 
-    /* BỘ TẠO THIỆP CẢI TIẾN: GỬI <TÊN NGƯỜI NHẬN> & XÓA FROM/TO */
+    /* 
+       CARD GENERATOR:
+       - Displays "Gửi <Tên người nhận>"
+       - Displays glowing round avatar of recipient inside preview
+       - NO "To:" or "From:"
+    */
     const cardReceiverSelect = document.getElementById('cardReceiverSelect');
     const cardWishPreset = document.getElementById('cardWishPreset');
     const customWishGroup = document.getElementById('customWishGroup');
@@ -1205,7 +1212,7 @@
       const receiverName = cardReceiverSelect.value;
       const targetMember = f6Members.find(m => m.name === receiverName);
 
-      // 1. Cập nhật Avatar người nhận trong thiệp
+      // 1. Recipient Avatar inside Card
       if (targetMember) {
         if (targetMember.avatar) {
           cardPreviewAvatarBox.innerHTML = `
@@ -1216,14 +1223,14 @@
           cardPreviewAvatarBox.innerHTML = `<span class="card-preview-avatar-emoji">${targetMember.emoji}</span>`;
         }
       } else {
-        // Cả nhóm F6
+        // Default "Cả Nhóm F6 Super Stars"
         cardPreviewAvatarBox.innerHTML = `<span class="card-preview-avatar-emoji">🌕</span>`;
       }
 
-      // 2. Cập nhật Dòng người nhận "Gửi <Tên>" (Xóa To / From)
+      // 2. Format title: "Gửi <Tên>" (No To / From)
       cardReceiverDisplay.innerText = `Gửi ${receiverName}`;
 
-      // 3. Cập nhật Lời chúc
+      // 3. Wish Content
       if (cardWishPreset.value === 'CUSTOM') {
         customWishGroup.style.display = 'block';
         cardTextDisplay.innerText = customWishInput.value.trim() ? `"${customWishInput.value}"` : '"Chúc bạn một mùa Trung Thu trọn vẹn niềm vui!"';
@@ -1242,13 +1249,12 @@
       const target = document.getElementById('cardExportTarget');
       html2canvas(target, { backgroundColor: '#120224', scale: 2 }).then(canvas => {
         const link = document.createElement('a');
-        link.download = `Thieptrungthu_F6_${cardReceiverSelect.value}.png`;
+        link.download = `Thieptrungthu_${cardReceiverSelect.value}.png`;
         link.href = canvas.toDataURL('image/png');
         link.click();
       });
     });
 
-    /* GIEO QUẺ TRUNG THU - XÓC ỐNG XĂM TRE */
     const bambooTubeBtn = document.getElementById('bambooTubeBtn');
     const btnShakeFortune = document.getElementById('btnShakeFortune');
     const drawnStickResult = document.getElementById('drawnStickResult');
